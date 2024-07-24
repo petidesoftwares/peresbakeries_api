@@ -1,0 +1,831 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Peres Bakeries Limited API v1",
+        "description": "Peres Bakeries Limited API for managing daily transactons in bakery",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/v1/staff/logout": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Deauthenticate a staff",
+                "operationId": "Stafflogout",
+                "responses": {
+                    "200": {
+                        "description": "Successful logout operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Successfully logged out"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "staff/refresh": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Refresh staff token after expiration",
+                "operationId": "staffrefresh",
+                "responses": {
+                    "200": {
+                        "description": "Successful token refresh",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "token": "string",
+                                            "user": {
+                                                "surname": "string",
+                                                "firstname": "string",
+                                                "gender": "string",
+                                                "phone_number": "number",
+                                                "address": "string",
+                                                "position": "string",
+                                                "dob": "string"
+                                            },
+                                            "token_type": "bearer",
+                                            "expires_in": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "staff/firstlogin": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Login staff token after expiration",
+                "operationId": "staffFirstLogin",
+                "responses": {
+                    "200": {
+                        "description": "Successful first login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "0": "login_type':'first",
+                                            "token": "string",
+                                            "user": {
+                                                "surname": "string",
+                                                "firstname": "string",
+                                                "gender": "string",
+                                                "phone_number": "number",
+                                                "address": "string",
+                                                "position": "string",
+                                                "dob": "string"
+                                            },
+                                            "token_type": "bearer",
+                                            "expires_in": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/staff/login": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Staff login",
+                "operationId": "stafflogin",
+                "requestBody": {
+                    "description": "Staf login object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StaffLoginModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "login_type": "string",
+                                        "token": "string",
+                                        "admin": {
+                                            "id": "string",
+                                            "surname": "string",
+                                            "firstname": "string",
+                                            "mobile_number": "number",
+                                            "position": "string",
+                                            "address": "string",
+                                            "gender": "string",
+                                            "dob": "string",
+                                            "creared_at": "string"
+                                        },
+                                        "token_type": "bearer",
+                                        "expires_in": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/carts": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Get all cart items",
+                "description": "Get allcart items",
+                "operationId": "GetAllCartItems",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "product_id": "xxxxxxxxxxx",
+                                            "quantity": 4,
+                                            "price": 200,
+                                            "amount": 800
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/cart": {
+            "post": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Create new cart item",
+                "operationId": "AddToCart",
+                "requestBody": {
+                    "description": "Create cart object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCartModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cart item Successfully added"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/cart/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Delete a cart from storage",
+                "operationId": "CartDelete",
+                "responses": {
+                    "200": {
+                        "description": "Successful delete operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Cart successfully deleted"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get all products",
+                "description": "Get all products",
+                "operationId": "GetAllProducts",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "name": "Jumbo",
+                                            "price": 1000,
+                                            "description": "Jumbo size bread",
+                                            "shape": "cuboid",
+                                            "size": "10cm X 10cm X 25cm",
+                                            "stock": 500
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/product": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create new product",
+                "operationId": "ProductUpload",
+                "requestBody": {
+                    "description": "Create Product object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProductModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product Successfully created"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/product/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get product",
+                "description": "Get product",
+                "operationId": "GetAProduct",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "name": "Jumbo",
+                                        "price": 1000,
+                                        "description": "Jumbo size bread",
+                                        "shape": "cuboid",
+                                        "size": "10cm X 10cm X 25cm",
+                                        "stock": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/product/update/{id}": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update product details",
+                "operationId": "ProductUpdate",
+                "requestBody": {
+                    "description": "Update product object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProductModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product Record Successfully updated"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/product/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Delete a product from storage",
+                "operationId": "ProductDelete",
+                "responses": {
+                    "200": {
+                        "description": "Successful delete operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Product successfully deleted"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/staffs": {
+            "get": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Get all staffs",
+                "description": "Get all staffs",
+                "operationId": "GetAllStaff",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "surname": "Oritz",
+                                            "firstname": "Roderick",
+                                            "mobile_number": "08010000000",
+                                            "position": "HRM",
+                                            "address": "No. 8 Yabrifa Close, Kpansia, Yenagoa",
+                                            "gender": "Male",
+                                            "date_of_birth": "01-01-2000"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/staff": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Create new staff",
+                "operationId": "StaffUpload",
+                "requestBody": {
+                    "description": "Create Staff object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateStaffModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Staff Successfully created"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/staff/{id}": {
+            "get": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Get staff details",
+                "description": "Get staff details",
+                "operationId": "GetStaff",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "surname": "Oritz",
+                                        "firstname": "Roderick",
+                                        "mobile_number": "08010000000",
+                                        "position": "HRM",
+                                        "address": "No. 8 Yabrifa Close, Kpansia, Yenagoa",
+                                        "gender": "Male",
+                                        "date_of_birth": "01-01-2000"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/update/{id}": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Update staff details",
+                "operationId": "StaffUpdate",
+                "requestBody": {
+                    "description": "Update Staff object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateStaffModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Staff Record Successfully updated"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "Delete a staff from storage",
+                "operationId": "StaffDelete",
+                "responses": {
+                    "200": {
+                        "description": "Successful delete operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Staff successfully deleted"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateCartModel": {
+                "title": "CreateProductModel",
+                "description": "Pares Bakeries Limited Login Model",
+                "properties": {
+                    "product_id": {
+                        "title": "Product Id",
+                        "type": "string",
+                        "example": "xxxxxxxxxxxxxxxxx"
+                    },
+                    "price": {
+                        "title": "Product unit price",
+                        "type": "string",
+                        "example": "200"
+                    },
+                    "quantity": {
+                        "title": "Product quantity",
+                        "type": "string",
+                        "example": "4"
+                    },
+                    "amount": {
+                        "title": "Amount for Total Units",
+                        "type": "string",
+                        "example": 800
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateProductModel"
+                }
+            },
+            "CreateProductModel": {
+                "title": "CreateProductModel",
+                "description": "Pares Bakeries Limited Login Model",
+                "properties": {
+                    "name": {
+                        "title": "Product name",
+                        "type": "string",
+                        "example": "Sardine Bread"
+                    },
+                    "price": {
+                        "title": "Product price",
+                        "type": "string",
+                        "example": "200"
+                    },
+                    "description": {
+                        "title": "Product description",
+                        "type": "string",
+                        "example": "Jumbo size sardine bread"
+                    },
+                    "shape": {
+                        "title": "Product shape",
+                        "type": "string",
+                        "example": "Cuboid"
+                    },
+                    "size": {
+                        "title": "Product size",
+                        "type": "string",
+                        "example": "10cm X 10cm X 25cm"
+                    },
+                    "stock": {
+                        "title": "Product quantity in stock",
+                        "type": "string",
+                        "example": "300"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateProductModel"
+                }
+            },
+            "CreateStaffModel": {
+                "title": "CreateStaffModel",
+                "description": "Pares Bakeries Limited Login Model",
+                "properties": {
+                    "surname": {
+                        "title": "Staff Surname",
+                        "type": "string",
+                        "example": "Ide"
+                    },
+                    "firstname": {
+                        "title": "Staff First Name",
+                        "type": "string",
+                        "example": "Peter"
+                    },
+                    "mobile_number": {
+                        "title": "Staff Phone Number",
+                        "type": "string",
+                        "example": "08012345678"
+                    },
+                    "address": {
+                        "title": "Staff Address",
+                        "type": "string",
+                        "example": "No. 8 Yabrifa Close, Kpansia, Yenagoa"
+                    },
+                    "position": {
+                        "title": "Staff position",
+                        "type": "string",
+                        "example": "HR"
+                    },
+                    "gender": {
+                        "title": "Staff Gender",
+                        "type": "string",
+                        "example": "Male, Female"
+                    },
+                    "dob": {
+                        "title": "Staff Date of Birth",
+                        "type": "string",
+                        "example": "dd-mm-yyyy, mm-dd-yyyy, yyyy-mm-dd, dd/mm/yyyy, mm/dd/yyyy, yyyy/mm/dd"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateStaffModel"
+                }
+            },
+            "StaffLoginModel": {
+                "title": "StudentLoginModel",
+                "description": "Peres Bakeries sales management Staff Login Model",
+                "properties": {
+                    "mobile_number": {
+                        "title": "Staff Phone Number",
+                        "type": "string",
+                        "example": "08012345678"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "type": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "StaffLoginModel"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Staff",
+            "description": "Staff"
+        },
+        {
+            "name": "Sales",
+            "description": "Sales"
+        },
+        {
+            "name": "Product",
+            "description": "Product"
+        }
+    ]
+}

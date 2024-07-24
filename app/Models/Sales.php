@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Sales extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'product_id',
+        'quantity',
+        'price',
+        'amount',
+    ];
+
+    public function soldProduct(){
+        return $this->belongsTo("App\Models\Product","product_id","id");
+    }
 }

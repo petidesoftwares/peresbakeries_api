@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string("position", 30);
             $table->text("address");
             $table->string("dob");
+            $table->string("password");
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
