@@ -202,7 +202,7 @@
                 ]
             }
         },
-        "/v1/staff/carts": {
+        "/carts": {
             "get": {
                 "tags": [
                     "Sales"
@@ -491,6 +491,136 @@
                 ]
             }
         },
+        "/v1/staff/sales": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Get all saled",
+                "description": "Get all sales",
+                "operationId": "GetAllSales",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "product_id": "xxxxxxxxxxx",
+                                            "quantity": 4,
+                                            "price": 200,
+                                            "amount": 800,
+                                            "created_at": "dd/mm/yyyy"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Make new sales",
+                "operationId": "InitiateSales",
+                "requestBody": {
+                    "description": "Create sales object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSaleModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sales item Successfully created"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/v1/staff/sales/{date}": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Get daily sales",
+                "description": "Get daily sales",
+                "operationId": "GetDailySales",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "product_id": "xxxxxxxxxxx",
+                                            "quantity": 4,
+                                            "price": 200,
+                                            "amount": 800,
+                                            "created_at": "dd/mm/yyyy"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/sales/range": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Get sales range",
+                "description": "Get sales range",
+                "operationId": "GetSalesRange",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "product_id": "xxxxxxxxxxx",
+                                            "quantity": 4,
+                                            "price": 200,
+                                            "amount": 800,
+                                            "created_at": "dd/mm/yyyy"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/staff/staffs": {
             "get": {
                 "tags": [
@@ -523,7 +653,7 @@
                 }
             }
         },
-        "/v1/staff/staff": {
+        "v1/staff/staff": {
             "post": {
                 "tags": [
                     "Staff"
@@ -678,7 +808,7 @@
     "components": {
         "schemas": {
             "CreateCartModel": {
-                "title": "CreateProductModel",
+                "title": "CreateCartModel",
                 "description": "Pares Bakeries Limited Login Model",
                 "properties": {
                     "product_id": {
@@ -704,7 +834,7 @@
                 },
                 "type": "object",
                 "xml": {
-                    "name": "CreateProductModel"
+                    "name": "CreateCartModel"
                 }
             },
             "CreateProductModel": {
@@ -745,6 +875,36 @@
                 "type": "object",
                 "xml": {
                     "name": "CreateProductModel"
+                }
+            },
+            "CreateSaleModel": {
+                "title": "CreateSaleModel",
+                "description": "Pares Bakeries Limited Login Model",
+                "properties": {
+                    "product_id": {
+                        "title": "Product Id",
+                        "type": "string",
+                        "example": "xxxxxxxxxxxxxxxxx"
+                    },
+                    "price": {
+                        "title": "Product unit price",
+                        "type": "string",
+                        "example": "200"
+                    },
+                    "quantity": {
+                        "title": "Product quantity",
+                        "type": "string",
+                        "example": "4"
+                    },
+                    "amount": {
+                        "title": "Amount for Total Units",
+                        "type": "string",
+                        "example": 800
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateSaleModel"
                 }
             },
             "CreateStaffModel": {

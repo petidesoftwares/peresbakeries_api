@@ -63,7 +63,7 @@ class SalesController extends Controller
      *     @OA\RequestBody(
      *         description="Create sales object",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/CreateSalesModel")
+     *         @OA\JsonContent(ref="#/components/schemas/CreateSaleModel")
      *     ),
      *
      *      @OA\Response(
@@ -128,7 +128,7 @@ class SalesController extends Controller
  * )
  */
     public function GetDailySales(string $date){
-        $sales = Sales::where("created_at",$date);
+        $sales = Sales::where("created_at",$date)->get();
         return response()->json(["status"=>200, "data" => $sales],200);
     }
 
@@ -161,12 +161,16 @@ class SalesController extends Controller
  * )
  */
 public function GetSalesRange(Request $request){
-    $request->validate([
-        "start_date" => "required",
-        "end_date" => "required"
-    ]);
-    $sales = Sales::where("created_at",$date);
-    return response()->json(["status"=>200, "data" => $sales],200);
+    $user = Auth::user();
+    if($user->position == "CEO"){
+        $request->validate([
+            "start_date" => "required",
+            "end_date" => "required"
+        ]);
+        $sales = Sales::where("created_at",$request->input("start_date"))->where("created_at","<=",$request->input("end_date"))->get();
+        return response()->json(["status"=>200, "data" => $sales],200);
+    }
+    return response()->json(["status" => 401, "message" => "Unauthorized request"],200);
 }
 
     /**

@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 
 class CartController extends Controller
 {
 /**
  * @OA\Get(
- *     path="/v1/staff/carts",
+ *     path="/carts",
  *     operationId="GetAllCartItems",
  *     tags={"Sales"},
  *     summary="Get all cart items",
@@ -40,7 +41,8 @@ class CartController extends Controller
  */
     public function index()
     {
-        response()->json(["status" => 200, "data" => Cart::all()],200);
+        $cart = DB::select("select * from cart");
+        response()->json(["status" => 200, "data" =>$cart ],200);
     }
 
     /**
@@ -94,7 +96,7 @@ class CartController extends Controller
         ]);
         $cart = $request->all();
         Cart::create($cart);
-        response()->json(["status" => 200, "message" => "Item added to your cart", "data" => Cart::all()],200);
+        response()->json(["status" => 200, "message" => "Item added to your cart"],200);
     }
 
     /**

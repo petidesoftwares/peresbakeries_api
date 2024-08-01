@@ -16,15 +16,15 @@
  * @author  Peter Ide <petideenterprise@gmail.com>
  *
  * @OA\Schema(
- *     title="CreateSalesModel",
+ *     title="CreateSaleModel",
  *     description="Pares Bakeries Limited Login Model",
  *     @OA\Xml(
- *         name="CreateSalesModel"
+ *         name="CreateSaleModel"
  *     )
  * )
  */
 
- class CreateSalesModel
+ class CreateSaleModel
  {
     /**
      * @OA\Property(

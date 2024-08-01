@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\Staff;
 
 class StaffController extends Controller
@@ -56,7 +57,7 @@ class StaffController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/v1/staff/staff",
+     *      path="v1/staff/staff",
      *      operationId="StaffUpload",
      *      tags={"Staff"},
      *      summary="Create new staff",
@@ -96,7 +97,7 @@ class StaffController extends Controller
             'mobile_number'=>$request->input('mobile_number'),
             'position'=>$request->input('position'),
             'address'=>$request->input('address'),
-            'dob'=>$request->input('date_of_birth')
+            'dob'=>$request->input('dob')
         ], [
             'firstname'=>'required|min:3|max:50',
             'surname'=>'required|min:3|max:50',
@@ -107,7 +108,7 @@ class StaffController extends Controller
             'dob' => 'required',
         ]);
 
-        $validator = $validator->validate();
+        $validator->validate();
 
         $staff = [
             'firstname'=>$request->input('firstname'),
@@ -116,13 +117,13 @@ class StaffController extends Controller
             'mobile_number'=>$request->input('mobile_number'),
             'position'=>$request->input('position'),
             'address'=>$request->input('address'),
-            'address'=>$request->input('date_of_birth'),
+            'dob'=>$request->input('dob'),
             'password'=>Hash::make($request->input('mobile_number')),
         ];
 
-        $create = Staff::create($staff);
+        $created = Staff::create($staff);
 
-        return response()->json(['status'=>200, 'data'=>$create, 'message'=>'Staff created successfuly.'],200);
+        return response()->json(['status'=>200, "data"=> $created, 'message'=>'Staff created successfuly.'],200);
 
     }
 

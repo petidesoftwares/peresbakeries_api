@@ -42,7 +42,7 @@ class ProductController extends Controller
  */
     public function index()
     {
-        return response()->json(["status"=>200, "data"=>Product::paginate(15)]);
+        return response()->json(["status"=>200, "data"=>Product::where("deleted_at",null)->paginate(15)]);
     }
 
     /**
@@ -98,13 +98,13 @@ class ProductController extends Controller
         ];
         $validator = Validator::make($product,[
             "name" => "required|max:25",
-            "price" => "required|digits:6",
+            "price" => "required",
             "description" => "required",
-            "stock" => "required| digits:6"
+            "stock" => "required"
         ]);
         $validator->validate();
-        Product::create($product);
-        return response()->json(["status"=>200, "message"=>"Product successfully created"],200);
+        $newProduct = Product::create($product);
+        return response()->json(["status"=>200, "data"=>$newProduct, "message"=>"Product successfully created"],200);
     }
 
   /**
