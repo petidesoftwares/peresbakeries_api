@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Str;
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$host = $url["host"] ?? null;
+$username = $url["user"] ?? null;
+$password = $url["pass"] ?? null;
+$database = substr($url["path"], 1);
+
 return [
 
     /*
@@ -49,11 +55,11 @@ return [
             // 'password' => env('DB_PASSWORD', ''),
 
             'url' => env('CLEARDB_DATABASE_URL'),
-            'host' => env('DB_HOST', 'us-cluster-east-01.k8s.cleardb.net'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'heroku_ff76476aadd051d'),
-            'username' => env('DB_USERNAME', 'becb90391439dd'),
-            'password' => env('DB_PASSWORD', 'd2d1da42'),
+            'host' => $host,//env('DB_HOST', 'us-cluster-east-01.k8s.cleardb.net'),
+            // 'port' => env('DB_PORT', '3306'),
+            'database' => $database, //env('DB_DATABASE', 'heroku_ff76476aadd051d'),
+            'username' => $username, //env('DB_USERNAME', 'becb90391439dd'),
+            'password' => $password, //env('DB_PASSWORD', 'd2d1da42'),
 
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
