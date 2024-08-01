@@ -41,7 +41,7 @@ class CartController extends Controller
  */
     public function index()
     {
-        $cart = DB::select("select * from cart");
+        $cart = DB::select("select * from carts");
         response()->json(["status" => 200, "data" =>$cart ],200);
     }
 

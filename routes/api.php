@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/staff/login","App\Http\Controllers\Auth\LoginController@login");
 Route::get("/carts", 'App\Http\Controllers\v1\CartController@index');
-Route::get('/staffs','App\Http\Controllers\v1\StaffController@index');
 
 Route::group(["prefix"=>"v1"], function(){
     Route::group(["prefix"=>"staff", "middleware"=>['assign.guard:staff','jwt.auth']], function(){
