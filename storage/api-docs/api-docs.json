@@ -202,7 +202,7 @@
                 ]
             }
         },
-        "/carts": {
+        "/v1/staff/carts": {
             "get": {
                 "tags": [
                     "Sales"
@@ -519,7 +519,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/sales": {
             "post": {
                 "tags": [
                     "Sales"

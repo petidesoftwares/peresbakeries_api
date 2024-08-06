@@ -8,6 +8,8 @@ use App\Models\Sales;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
+use Illuminate\Support\Str;
 
 class SalesController extends Controller
 {
@@ -54,7 +56,7 @@ class SalesController extends Controller
 
         /**
      * @OA\Post(
-     *      path="/v1/staff/sales",
+     *      path="/sales",
      *      operationId="InitiateSales",
      *      tags={"Sales"},
      *      summary="Make new sales",
@@ -84,10 +86,22 @@ class SalesController extends Controller
      *     },
      *
      *     )
-     */
+     */                                                                            
     public function store(Request $request)
     {
         $salesCart = Cart::all();
+        $ref_id = Str::uuid();
+        foreach($salesCart AS $item){
+            $productObject = [
+                'ref_id' => $ref_id,
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'price' => $item->price,
+                'amount' => $item->amount,
+            ];
+            Sales::create($productObject);
+        }
+        return response()->json(["status"=>200, "data"=>Sales::all()],200);
         
     }
 
@@ -106,6 +120,12 @@ class SalesController extends Controller
  *     tags={"Sales"},
  *     summary="Get daily sales",
  *     description="Get daily sales",
+ * 
+ *      @OA\RequestBody(
+ *         description="Daily sales request object",
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/CreateDailySaleModel")
+ *     ),
  * 
  *     @OA\Response(
  *              response="200", 

@@ -18,7 +18,7 @@
  *
  * @OA\Schema(
  *     title="CreateStaffModel",
- *     description="Pares Bakeries Limited Login Model",
+ *     description="Pares Bakeries Limited Staff Model",
  *     @OA\Xml(
  *         name="CreateStaffModel"
  *     )

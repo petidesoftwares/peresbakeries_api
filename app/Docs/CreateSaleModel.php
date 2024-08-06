@@ -17,7 +17,7 @@
  *
  * @OA\Schema(
  *     title="CreateSaleModel",
- *     description="Pares Bakeries Limited Login Model",
+ *     description="Pares Bakeries Limited Sales Model",
  *     @OA\Xml(
  *         name="CreateSaleModel"
  *     )

@@ -14,7 +14,7 @@ class CartController extends Controller
 {
 /**
  * @OA\Get(
- *     path="/carts",
+ *     path="/v1/staff/carts",
  *     operationId="GetAllCartItems",
  *     tags={"Sales"},
  *     summary="Get all cart items",
@@ -41,8 +41,7 @@ class CartController extends Controller
  */
     public function index()
     {
-        $cart = DB::select("select * from carts");
-        response()->json(["status" => 200, "data" =>$cart ],200);
+        return response()->json(["status" => 200, "data" =>Cart::all() ],200);
     }
 
     /**

@@ -17,7 +17,7 @@
  *
  * @OA\Schema(
  *     title="CreateCartModel",
- *     description="Pares Bakeries Limited Login Model",
+ *     description="Pares Bakeries Limited Cart Model",
  *     @OA\Xml(
  *         name="CreateCartModel"
  *     )
