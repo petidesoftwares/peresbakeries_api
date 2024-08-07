@@ -71,10 +71,10 @@ class LoginController extends AuthController
      */
 
     public function login(Request $request){
-        // $request->validate([
-        //     'mobile_number'=>'bail|required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
-        //     'password'=>'required|min:6'
-        // ]);
+        $request->validate([
+            'mobile_number'=>'bail|required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'password'=>'required|min:6'
+        ]);
 
         $credentials = [
             'mobile_number' => $request->input("mobile_number"),
