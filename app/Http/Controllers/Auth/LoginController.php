@@ -80,7 +80,6 @@ class LoginController extends AuthController
             'mobile_number' => $request->input("mobile_number"),
             'password' => $request->input("password"),
         ];
-        return $credentials;
 
         if($token = Auth::attempt($credentials)){
             if($credentials['mobile_number'] == $credentials['password']){
