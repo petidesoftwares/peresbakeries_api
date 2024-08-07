@@ -28,12 +28,12 @@
  {
     /**
      * @OA\Property(
-     *          title="Date",
-     *          example="dd/mm/yyyy"
+     *          title="DateTime",
+     *          example="dd/mm/yyyy hh:mm:ss"
      *      ),
      *
      * @var string
      */
-    private $date;
+    private $dateTime;
 
  }
