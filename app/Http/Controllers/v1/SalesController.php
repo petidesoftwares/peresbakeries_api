@@ -89,20 +89,24 @@ class SalesController extends Controller
      */                                                                            
     public function store(Request $request)
     {
-        $salesCart = Cart::all();
-        $ref_id = Str::uuid();
-        foreach($salesCart AS $item){
-            $productObject = [
-                'ref_id' => $ref_id,
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'price' => $item->price,
-                'amount' => $item->amount,
-            ];
-            Sales::create($productObject);
+        $user = Auth::user();
+        if($user->position == "Sales"){
+            $salesCart = Cart::all();
+            $ref_id = Str::uuid();
+            foreach($salesCart AS $item){
+                $productObject = [
+                    'ref_id' => $ref_id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'price' => $item->price,
+                    'amount' => $item->amount,
+                ];
+                Sales::create($productObject);
+            }
+            event(new SalesNotificationEvent($user->id, "New Sales"));
+            return response()->json(["status"=>200, "data"=>Sales::all()],200);
         }
-        return response()->json(["status"=>200, "data"=>Sales::all()],200);
-        
+        return response()->json(["status"=>401, "error"=>"Unathorized access"],401);       
     }
 
     /**

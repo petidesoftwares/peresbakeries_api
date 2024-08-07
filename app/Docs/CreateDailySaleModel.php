@@ -24,7 +24,7 @@
  * )
  */
 
- class CreateDilySaleModel
+ class CreateDailySaleModel
  {
     /**
      * @OA\Property(

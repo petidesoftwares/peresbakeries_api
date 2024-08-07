@@ -571,6 +571,17 @@
                 "summary": "Get daily sales",
                 "description": "Get daily sales",
                 "operationId": "GetDailySales",
+                "requestBody": {
+                    "description": "Daily sales request object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDailySaleModel"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Successful",
@@ -811,7 +822,7 @@
         "schemas": {
             "CreateCartModel": {
                 "title": "CreateCartModel",
-                "description": "Pares Bakeries Limited Login Model",
+                "description": "Pares Bakeries Limited Cart Model",
                 "properties": {
                     "product_id": {
                         "title": "Product Id",
@@ -839,9 +850,24 @@
                     "name": "CreateCartModel"
                 }
             },
+            "CreateDailySaleModel": {
+                "title": "CreateDailySaleModel",
+                "description": "Pares Bakeries Limited Daily Sales Model",
+                "properties": {
+                    "date": {
+                        "title": "Date",
+                        "type": "string",
+                        "example": "dd/mm/yyyy"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateDailySaleModel"
+                }
+            },
             "CreateProductModel": {
                 "title": "CreateProductModel",
-                "description": "Pares Bakeries Limited Login Model",
+                "description": "Pares Bakeries Limited Product Model",
                 "properties": {
                     "name": {
                         "title": "Product name",
@@ -881,7 +907,7 @@
             },
             "CreateSaleModel": {
                 "title": "CreateSaleModel",
-                "description": "Pares Bakeries Limited Login Model",
+                "description": "Pares Bakeries Limited Sales Model",
                 "properties": {
                     "product_id": {
                         "title": "Product Id",
@@ -911,7 +937,7 @@
             },
             "CreateStaffModel": {
                 "title": "CreateStaffModel",
-                "description": "Pares Bakeries Limited Login Model",
+                "description": "Pares Bakeries Limited Staff Model",
                 "properties": {
                     "surname": {
                         "title": "Staff Surname",
