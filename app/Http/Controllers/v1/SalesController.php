@@ -105,7 +105,7 @@ class SalesController extends Controller
                 Sales::create($productObject);
             }
             event(new SalesNotificationEvent($user->id, "New Sales"));
-            return response()->json(["status"=>200, "data"=>Sales::all()],200);
+            return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
         }
         return response()->json(["status"=>401, "error"=>"Unathorized access"],401);       
     }
