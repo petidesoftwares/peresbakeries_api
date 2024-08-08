@@ -854,10 +854,10 @@
                 "title": "CreateDailySaleModel",
                 "description": "Pares Bakeries Limited Daily Sales Model",
                 "properties": {
-                    "date": {
-                        "title": "Date",
+                    "dateTime": {
+                        "title": "DateTime",
                         "type": "string",
-                        "example": "dd/mm/yyyy"
+                        "example": "dd/mm/yyyy hh:mm:ss"
                     }
                 },
                 "type": "object",

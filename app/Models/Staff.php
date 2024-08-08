@@ -39,7 +39,7 @@ class Staff extends Authenticatable implements JWTSubject, CanResetPassword
     ];
 
     public function getJWTIdentifier(){
-        return getKey();
+        return $this->getKey();
     }
 
     /**
