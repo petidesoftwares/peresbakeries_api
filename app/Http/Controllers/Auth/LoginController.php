@@ -83,7 +83,6 @@ class LoginController extends AuthController
 
 
         if($token = Auth::attempt($credentials)){
-            return $credentials;
             if($credentials['mobile_number'] == $credentials['password']){
                 return $this->firstLoginResponse(auth()->user(), $token);
             }else{
