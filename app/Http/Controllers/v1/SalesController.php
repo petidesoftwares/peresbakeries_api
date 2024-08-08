@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Events\SalesNotificationEvent;
 use Illuminate\Http\Request;
 use App\Models\Sales;
 use Illuminate\Support\Facades\Validator;

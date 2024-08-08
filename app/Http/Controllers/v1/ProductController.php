@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Events\ProductsNotificationEvent;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
@@ -88,23 +89,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = [
-            "name" => $request->input("name"),
-            "price" => $request->input("price"),
-            "description" => $request->input("description"),
-            "shape" => $request->input("shape"),
-            "size" => $request->input("size"),
-            "stock" => $request->input("stock"),
-        ];
-        $validator = Validator::make($product,[
-            "name" => "required|max:25",
-            "price" => "required",
-            "description" => "required",
-            "stock" => "required"
-        ]);
-        $validator->validate();
-        $newProduct = Product::create($product);
-        return response()->json(["status"=>200, "data"=>$newProduct, "message"=>"Product successfully created"],200);
+        $user = Auth::user();
+        if($user->position == "Manager"){
+            $product = [
+                "name" => $request->input("name"),
+                "price" => $request->input("price"),
+                "description" => $request->input("description"),
+                "shape" => $request->input("shape"),
+                "size" => $request->input("size"),
+                "stock" => $request->input("stock"),
+            ];
+            $validator = Validator::make($product,[
+                "name" => "required|max:25",
+                "price" => "required",
+                "description" => "required",
+                "stock" => "required"
+            ]);
+            $validator->validate();
+            $newProduct = Product::create($product);
+            event(new ProductsNotificationEvent($newProduct, "New product added"));
+            return response()->json(["status"=>200, "data"=>$newProduct, "message"=>"Product successfully created"],200);
+        }
+        return respopnse()->json(["status"=>401, "error" => "Unauthorized Access"]);
+        
     }
 
   /**
