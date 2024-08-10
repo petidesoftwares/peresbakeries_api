@@ -90,40 +90,48 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make([
-            'firstname'=>$request->input('firstname'),
-            'surname'=>$request->input('surname'),
-            'gender'=>$request->input('gender'),
-            'mobile_number'=>$request->input('mobile_number'),
-            'position'=>$request->input('position'),
-            'address'=>$request->input('address'),
-            'dob'=>$request->input('dob')
-        ], [
-            'firstname'=>'required|min:3|max:50',
-            'surname'=>'required|min:3|max:50',
-            'gender'=>'required|min:4|max:6',
-            'mobile_number' => "required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/|unique:staff,mobile_number",
-            'position'=>'required',
-            'address' => 'required',
-            'dob' => 'required',
-        ]);
-
-        $validator->validate();
-
-        $staff = [
-            'firstname'=>$request->input('firstname'),
-            'surname'=>$request->input('surname'),
-            'gender'=>$request->input('gender'),
-            'mobile_number'=>$request->input('mobile_number'),
-            'position'=>$request->input('position'),
-            'address'=>$request->input('address'),
-            'dob'=>$request->input('dob'),
-            'password'=>Hash::make($request->input('mobile_number')),
-        ];
-
-        $created = Staff::create($staff);
-
-        return response()->json(['status'=>200, "data"=> $created, 'message'=>'Staff created successfuly.'],200);
+        $user = Auth::user();
+        if($user->position == "CEO"){
+            $validator = Validator::make([
+                'firstname'=>$request->input('firstname'),
+                'surname'=>$request->input('surname'),
+                'gender'=>$request->input('gender'),
+                'mobile_number'=>$request->input('mobile_number'),
+                'position'=>$request->input('position'),
+                'address'=>$request->input('address'),
+                'dob'=>$request->input('dob')
+            ], [
+                'firstname'=>'required|min:3|max:50',
+                'surname'=>'required|min:3|max:50',
+                'gender'=>'required|min:4|max:6',
+                'mobile_number' => "required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/|unique:staff,mobile_number",
+                'position'=>'required',
+                'address' => 'required',
+                'dob' => 'required',
+            ]);
+    
+            $validator->validate();
+            
+            if($request->input('position') == "CEO"){
+                $staff = [
+                    'firstname'=>$request->input('firstname'),
+                    'surname'=>$request->input('surname'),
+                    'gender'=>$request->input('gender'),
+                    'mobile_number'=>$request->input('mobile_number'),
+                    'position'=>$request->input('position'),
+                    'address'=>$request->input('address'),
+                    'dob'=>$request->input('dob'),
+                    'password'=>Hash::make($request->input('mobile_number')),
+                ];
+        
+                $created = Staff::create($staff);
+        
+                return response()->json(['status'=>200, "data"=> $created, 'message'=>'Staff created successfuly.'],200);
+            }
+            return response()->json(["status"=>300, "message"=>"Position already taken"],300);    
+            
+        }
+        
 
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Events\SalesNotificationEvent;
 use Illuminate\Http\Request;
 use App\Models\Sales;
+use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -103,6 +104,8 @@ class SalesController extends Controller
                     'amount' => $item->amount,
                 ];
                 Sales::create($productObject);
+                $stock = Product::where("id",$productObject["product_id"])->get("quantity");
+                Product::where("id", $productObject["product_id"])->update(["quantity", $stock->quantity - $productObject["quantity"]]);
             }
             event(new SalesNotificationEvent($user->id, "New Sales"));
             return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
