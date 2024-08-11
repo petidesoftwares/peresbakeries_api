@@ -43,7 +43,7 @@ class ProductController extends Controller
  */
     public function index()
     {
-        return response()->json(["status"=>200, "data"=>Product::where("deleted_at",null)->paginate(15)]);
+        return response()->json(["status"=>200, "data"=>Product::where("deleted_at",null)->where("stock",">",0)->paginate(15)]);
     }
 
     /**

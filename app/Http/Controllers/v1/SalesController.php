@@ -104,8 +104,9 @@ class SalesController extends Controller
                     'amount' => $item->amount,
                 ];
                 Sales::create($productObject);
-                $stock = Product::where("id",$productObject["product_id"])->get("quantity");
-                Product::where("id", $productObject["product_id"])->update(["quantity", $stock->quantity - $productObject["quantity"]]);
+                $stock = Product::where("id",$productObject["product_id"])->get("stock");
+                Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);
+                Cart::truncate();
             }
             event(new SalesNotificationEvent($user->id, "New Sales"));
             return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
