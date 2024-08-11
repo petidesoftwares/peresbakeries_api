@@ -11,11 +11,35 @@ use Illuminate\Support\Facades\Auth;
 class ExpenditureController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+ * @OA\Get(
+ *     path="/v1/staff/expenditures",
+ *     operationId="GetAllExpenditure",
+ *     tags={"SalesExpenditure"},
+ *     summary="Get all expenditures",
+ *     description="Get all expenditures",
+ * 
+ *     @OA\Response(
+ *              response="200", 
+ *              description="Successful",
+ *              @OA\MediaType(
+ *              mediaType="application/json",
+ *              @OA\Schema(
+ *              example={
+ *                      {
+ *                          "id":1,
+ *                          "item": "Flour,
+ *                          "amount": 800,
+ *                          "created_at" : "dd/mm/yyyy"
+ *                      },
+ *                  },
+ *            )
+ *         ),
+ *     )
+ * )
+ */
     public function index()
     {
-        //
+        return response()->json(["status"=>200, "data"=>Expenditure::paginate(15)],200);
     }
 
     /**
@@ -28,7 +52,7 @@ class ExpenditureController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/v1/staff/product",
+     *      path="/v1/staff/expenditure",
      *      operationId="CreateExpenditure",
      *      tags={"Expenditure"},
      *      summary="Enter new expenditure",
@@ -109,6 +133,7 @@ class ExpenditureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Expenditure::where("id",$id)->delete();
+        return response()->json(["status"=>200, "message"=>"item removed successfully"],200);
     }
 }
