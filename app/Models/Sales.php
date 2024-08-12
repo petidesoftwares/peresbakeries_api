@@ -11,10 +11,12 @@ class Sales extends Model
 
     protected $fillable = [
         'ref_id',
+        'staff_id',
         'product_id',
         'quantity',
         'price',
         'amount',
+        "payment_method",
     ];
 
     public function soldProduct(){

@@ -93,16 +93,28 @@ class SalesController extends Controller
     {
         $user = Auth::user();
         if($user->position == "Sales"){
-            $salesCart = Cart::all();
+            // $salesCart = Cart::all();
+            $salesData = $request->input("salesObj");
+            $request->validate(["payment_method"=>"required"]);
+            $paymentMethod = $request->input("payment_method");
             $ref_id = Str::uuid();
-            foreach($salesCart AS $item){
+            foreach($salesData AS $item){
                 $productObject = [
-                    'ref_id' => $ref_id,
                     'product_id' => $item->product_id,
                     'quantity' => $item->quantity,
                     'price' => $item->price,
                     'amount' => $item->amount,
                 ];
+                $vlidator = Validator::make($productObject,[
+                    "product_id"=>"required",
+                    "quantity"=>"requred",
+                    "price" => "required",
+                    "amount" => "required"
+                ]);
+                $validator.validate();
+                $productObject->ref_id = $ref_id;
+                $productObject->staff_id = $user->id;
+                $productObject->paymentMethod;
                 Sales::create($productObject);
                 $stock = Product::where("id",$productObject["product_id"])->get("stock");
                 Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);

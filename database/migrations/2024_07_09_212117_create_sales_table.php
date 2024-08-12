@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedSmallInteger("quantity");
             $table->unsignedSmallInteger("price");
             $table->unsignedSmallInteger("amount");
+            $table->string("payment_method");
+            $table->foerignUuid("staff_id")->constrained();
             $table->timestamps();
         });
     }
