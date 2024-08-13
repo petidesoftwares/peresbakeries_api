@@ -4,9 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/staff/login","App\Http\Controllers\Auth\LoginController@login");
-Route::get("/carts", 'App\Http\Controllers\v1\CartController@index');
-Route::post('/sales','App\Http\Controllers\v1\SalesController@store');
-Route::post("/cart", 'App\Http\Controllers\v1\CartController@store');
 
 Route::group(["prefix"=>"v1"], function(){
     Route::group(["prefix"=>"staff", "middleware"=>['assign.guard:staff','jwt.auth']], function(){
@@ -25,6 +22,10 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get("/carts", 'App\Http\Controllers\v1\CartController@index');
         Route::post("/cart", 'App\Http\Controllers\v1\CartController@store');
         Route::delete("/cart/delete/{id}", "App\Http\Controllers\CartController@delete");
+    
+        Route::post('/sales','App\Http\Controllers\v1\SalesController@store');
+        Route::get('/sales','App\Http\Controllers\v1\SalesController@index');
+        Route::get("/query/sales", 'App\Http\Controllers\v1\SalesController@getSalesByAdmin');
 
         Route::post("/logout","App\Http\Controllers\Auth\LoginController@logout");
     });

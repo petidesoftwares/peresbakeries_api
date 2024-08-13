@@ -20,7 +20,7 @@ class SalesController extends Controller
  *     path="/v1/staff/sales",
  *     operationId="GetAllSales",
  *     tags={"Sales"},
- *     summary="Get all saled",
+ *     summary="Get all sales",
  *     description="Get all sales",
  * 
  *     @OA\Response(
@@ -46,6 +46,50 @@ class SalesController extends Controller
     public function index()
     {
         return response()->json(["status"=>200, "data"=>Sales::paginate(15)],200);
+    }
+
+    /**
+ * @OA\Get(
+ *     path="/v1/staff/query/sales",
+ *     operationId="GetAllSalesByAdmin",
+ *     tags={"Sales"},
+ *     summary="Get all sales",
+ *     description="Get all sales",
+ * 
+ *     @OA\Response(
+ *              response="200", 
+ *              description="Successful",
+ *              @OA\MediaType(
+ *              mediaType="application/json",
+ *              @OA\Schema(
+ *              example={
+ *                      {
+ *                          "product_id":"xxxxxxxxxxx",
+ *                          "quantity": 4,
+ *                          "price": 200,
+ *                          "amount": 800,
+ *                          "soldby": {
+ *                                     "id": "xxxxxxxxxxxxxxxxx",
+            *                          "surname":"Oritz",
+            *                          "firstname":"Roderick",
+            *                          "mobile_number":"08010000000",
+            *                          "position":"HRM",
+            *                          "address":"No. 8 Yabrifa Close, Kpansia, Yenagoa",
+            *                          "gender":"Male",
+            *                          "date_of_birth":"01-01-2000",
+            *                      },
+*                           "payment_method" =>"pos",
+ *                          "created_at" : "dd/mm/yyyy"
+ *                      },
+ *                  },
+ *            )
+ *         ),
+ *     )
+ * )
+ */
+
+    public function getSalesByAdmin(){
+        return response()->json(["status"=>200, "data"=>Sales::with("soldBy")->paginate(15)],200);
     }
 
     /**

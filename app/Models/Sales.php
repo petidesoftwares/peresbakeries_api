@@ -22,4 +22,8 @@ class Sales extends Model
     public function soldProduct(){
         return $this->belongsTo("App\Models\Product","product_id","id");
     }
+
+    public function soldBy(){
+        return $this->belongsTo("App\Models\Staff","staff_id","id");
+    }
 }
