@@ -97,7 +97,7 @@
                 "tags": [
                     "Staff"
                 ],
-                "summary": "Login staff token after expiration",
+                "summary": "Login staff token after expiration. Note: user-type is ceo, manager or sales.",
                 "operationId": "staffFirstLogin",
                 "responses": {
                     "200": {
@@ -633,7 +633,7 @@
                 }
             }
         },
-        "/sales": {
+        "/v1/staff//sales": {
             "post": {
                 "tags": [
                     "Sales"
