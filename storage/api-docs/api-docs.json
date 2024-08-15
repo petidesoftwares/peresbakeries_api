@@ -1060,6 +1060,16 @@
                         "title": "Amount for Total Units",
                         "type": "string",
                         "example": 800
+                    },
+                    "userId": {
+                        "title": "Sales Person Id",
+                        "type": "string",
+                        "example": "xxxxxxxxxxxxxxxxxxxxxx"
+                    },
+                    "paymentMetod": {
+                        "title": "Payment method",
+                        "type": "string",
+                        "example": "card"
                     }
                 },
                 "type": "object",

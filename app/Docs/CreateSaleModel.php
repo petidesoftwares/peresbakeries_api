@@ -69,7 +69,7 @@
     /**
      * @OA\Property(
      *          title="Sales Person Id",
-     *          example=xxxxxxxxxxxxxxxxxxxxxx
+     *          example="xxxxxxxxxxxxxxxxxxxxxx"
      *      ),
      *
      * @var string
@@ -79,7 +79,7 @@
     /**
      * @OA\Property(
      *          title="Payment method",
-     *          example=card
+     *          example="card"
      *      ),
      *
      * @var string
