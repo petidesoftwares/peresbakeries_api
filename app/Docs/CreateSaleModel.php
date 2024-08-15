@@ -66,4 +66,25 @@
      */
     private $amount;
 
+    /**
+     * @OA\Property(
+     *          title="Sales Person Id",
+     *          example=xxxxxxxxxxxxxxxxxxxxxx
+     *      ),
+     *
+     * @var string
+     */
+    private $userId;
+
+    /**
+     * @OA\Property(
+     *          title="Payment method",
+     *          example=card
+     *      ),
+     *
+     * @var string
+     */
+
+     private $paymentMetod;
+
  }
