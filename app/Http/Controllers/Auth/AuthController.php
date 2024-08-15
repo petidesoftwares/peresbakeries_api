@@ -120,7 +120,7 @@ class AuthController extends Controller
      *      path="staff/firstlogin",
      *      operationId="staffFirstLogin",
      *      tags={"Staff"},
-     *      summary="Login staff token after expiration",
+     *      summary="Login staff token after expiration. Note: user-type is ceo, manager or sales.",
      *
      *
      *      @OA\Response(
