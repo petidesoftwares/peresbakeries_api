@@ -27,7 +27,7 @@ class ExpenditureController extends Controller
  *              example={
  *                      {
  *                          "id":1,
- *                          "item": "Flour,
+ *                          "item": "Flour",
  *                          "amount": 800,
  *                          "created_at" : "dd/mm/yyyy"
  *                      },

@@ -310,6 +310,77 @@
                 ]
             }
         },
+        "/v1/staff/expenditures": {
+            "get": {
+                "tags": [
+                    "SalesExpenditure"
+                ],
+                "summary": "Get all expenditures",
+                "description": "Get all expenditures",
+                "operationId": "GetAllExpenditure",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "id": 1,
+                                            "item": "Flour",
+                                            "amount": 800,
+                                            "created_at": "dd/mm/yyyy"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/expenditure": {
+            "post": {
+                "tags": [
+                    "Expenditure"
+                ],
+                "summary": "Enter new expenditure",
+                "operationId": "CreateExpenditure",
+                "requestBody": {
+                    "description": "Enter Expenditure",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateExpenditureModel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Expenditure Successfully registered"
+                    },
+                    "422": {
+                        "description": "Unproccessable data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "error": "Unproccessable data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/v1/staff/products": {
             "get": {
                 "tags": [
@@ -496,7 +567,7 @@
                 "tags": [
                     "Sales"
                 ],
-                "summary": "Get all saled",
+                "summary": "Get all sales",
                 "description": "Get all sales",
                 "operationId": "GetAllSales",
                 "responses": {
@@ -511,6 +582,47 @@
                                             "quantity": 4,
                                             "price": 200,
                                             "amount": 800,
+                                            "created_at": "dd/mm/yyyy"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/staff/query/sales": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Get all sales",
+                "description": "Get all sales",
+                "operationId": "GetAllSalesByAdmin",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "product_id": "xxxxxxxxxxx",
+                                            "quantity": 4,
+                                            "price": 200,
+                                            "amount": 800,
+                                            "soldby": {
+                                                "id": "xxxxxxxxxxxxxxxxx",
+                                                "surname": "Oritz",
+                                                "firstname": "Roderick",
+                                                "mobile_number": "08010000000",
+                                                "position": "HRM",
+                                                "address": "No. 8 Yabrifa Close, Kpansia, Yenagoa",
+                                                "gender": "Male",
+                                                "date_of_birth": "01-01-2000"
+                                            },
+                                            "payment_method": "pos",
                                             "created_at": "dd/mm/yyyy"
                                         }
                                     ]
@@ -865,6 +977,26 @@
                     "name": "CreateDailySaleModel"
                 }
             },
+            "CreateExpenditureModel": {
+                "title": "CreateExpenditureModel",
+                "description": "Peres Bakeries Expenditure management Model",
+                "properties": {
+                    "item": {
+                        "title": "Item",
+                        "type": "string",
+                        "example": "Flour"
+                    },
+                    "amount": {
+                        "title": "Amount",
+                        "type": "string",
+                        "example": "5000"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateExpenditureModel"
+                }
+            },
             "CreateProductModel": {
                 "title": "CreateProductModel",
                 "description": "Pares Bakeries Limited Product Model",
@@ -1010,6 +1142,14 @@
         {
             "name": "Sales",
             "description": "Sales"
+        },
+        {
+            "name": "SalesExpenditure",
+            "description": "SalesExpenditure"
+        },
+        {
+            "name": "Expenditure",
+            "description": "Expenditure"
         },
         {
             "name": "Product",
