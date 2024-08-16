@@ -634,7 +634,7 @@
                 }
             }
         },
-        "/v1/staff//sales": {
+        "/sales": {
             "post": {
                 "tags": [
                     "Sales"

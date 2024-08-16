@@ -103,7 +103,7 @@ class SalesController extends Controller
 
         /**
      * @OA\Post(
-     *      path="/v1/staff//sales",
+     *      path="/sales",
      *      operationId="InitiateSales",
      *      tags={"Sales"},
      *      summary="Make new sales",
@@ -138,9 +138,8 @@ class SalesController extends Controller
     {
         $user = Auth::user();
         if($user->position == "Sales"){
-            // $salesCart = Cart::all();
+            $request->validate(["salseObj"=>"required", "payment_method"=>"required"]);
             $salesData = $request->input("salesObj");
-            $request->validate(["payment_method"=>"required"]);
             $paymentMethod = $request->input("payment_method");
             $ref_id = Str::uuid();
             foreach($salesData AS $item){
