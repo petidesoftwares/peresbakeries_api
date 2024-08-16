@@ -103,7 +103,7 @@ class SalesController extends Controller
 
         /**
      * @OA\Post(
-     *      path="/sales",
+     *      path="/v1/staff/sales",
      *      operationId="InitiateSales",
      *      tags={"Sales"},
      *      summary="Make new sales",
