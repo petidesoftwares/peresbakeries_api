@@ -72,7 +72,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *      path="staff/refresh",
+     *      path="staff/refresh/{user-type}",
      *      operationId="staffrefresh",
      *      tags={"Staff"},
      *      summary="Refresh staff token after expiration",

@@ -35,6 +35,7 @@ class SalesController extends Controller
  *                          "quantity": 4,
  *                          "price": 200,
  *                          "amount": 800,
+ *                          "payment_method": "pos",
  *                          "created_at" : "dd/mm/yyyy"
  *                      },
  *                  },
