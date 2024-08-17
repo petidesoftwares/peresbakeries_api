@@ -138,7 +138,7 @@ class SalesController extends Controller
     {
         $user = Auth::user();
         if($user->position == "Sales"){
-            $request->validate(["salseObj"=>"required", "payment_method"=>"required"]);
+            $request->validate(["salesObj"=>"required", "payment_method"=>"required"]);
             $salesData = $request->input("salesObj");
             $paymentMethod = $request->input("payment_method");
             $ref_id = Str::uuid();
