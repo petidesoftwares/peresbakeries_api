@@ -142,7 +142,7 @@ class SalesController extends Controller
             $salesData = $request->input("salesObj");
             $paymentMethod = $request->input("payment_method");
             $ref_id = Str::uuid();
-            $productObject = array();
+            $productObjectArray = array();
             foreach($salesData as $item){
                     $productObject['product_id'] = $item->product_id;
                     $productObject['quantity'] = $item->quantity;
@@ -160,12 +160,13 @@ class SalesController extends Controller
                 $productObject['ref_id'] = $ref_id;
                 $productObject['staff_id'] = $user->id;
                 $productObject['payment_method']=$paymentMethod;
+                $productObjectArray[] = $productObject;
                 // Sales::create($productObject);
                 // $stock = Product::where("id",$productObject["product_id"])->get("stock");
                 // Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);
                 // Cart::truncate();
             }
-            return response()->json($productObject);
+            return response()->json($productObjectArray);
             event(new SalesNotificationEvent($user->id, "New Sales"));
             return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
         }
