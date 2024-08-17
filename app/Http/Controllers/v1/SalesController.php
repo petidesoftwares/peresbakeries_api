@@ -145,10 +145,10 @@ class SalesController extends Controller
             $productObjectArray = [];
             foreach($salesData as $item){
                     $productObject=[
-                        'product_id' => $item->product_id,
-                        'quantity' => $item->quantity,
-                        'price' => $item->price,
-                        'amount' => $item->amount,
+                        'product_id' => $item['product_id'],
+                        'quantity' => $item['quantity'],
+                        'price' => $item['price'],
+                        'amount' => $item['amount'],
                     ];   
                
                 // $vlidator = Validator::make($productObject,[
