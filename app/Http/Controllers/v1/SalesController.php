@@ -143,13 +143,13 @@ class SalesController extends Controller
             $paymentMethod = $request->input("payment_method");
             $ref_id = Str::uuid();
             $productObject = array();
-            foreach($salesData AS $item){
-                $productObject = [
-                    'product_id' => $item->product_id,
-                    'quantity' => $item->quantity,
-                    'price' => $item->price,
-                    'amount' => $item->amount,
-                ];
+            // foreach($salesData AS $item){
+            //     $productObject = [
+            //         'product_id' => $item->product_id,
+            //         'quantity' => $item->quantity,
+            //         'price' => $item->price,
+            //         'amount' => $item->amount,
+            //     ];
                 // $vlidator = Validator::make($productObject,[
                 //     "product_id"=>"required",
                 //     "quantity"=>"requred",
@@ -165,8 +165,8 @@ class SalesController extends Controller
                 // $stock = Product::where("id",$productObject["product_id"])->get("stock");
                 // Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);
                 // Cart::truncate();
-            }
-            return response()->json($productObject);
+            // }
+            return response()->json($salesData);
             event(new SalesNotificationEvent($user->id, "New Sales"));
             return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
         }
