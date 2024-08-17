@@ -156,13 +156,14 @@ class SalesController extends Controller
                     "amount" => "required"
                 ]);
                 $validator.validate();
+                return response()->json($productObject);
                 $productObject->ref_id = $ref_id;
                 $productObject->staff_id = $user->id;
                 $productObject->paymentMethod;
                 Sales::create($productObject);
                 $stock = Product::where("id",$productObject["product_id"])->get("stock");
                 Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);
-                Cart::truncate();
+                // Cart::truncate();
             }
             event(new SalesNotificationEvent($user->id, "New Sales"));
             return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
