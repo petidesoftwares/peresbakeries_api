@@ -144,10 +144,12 @@ class SalesController extends Controller
             $ref_id = Str::uuid();
             $productObjectArray = [];
             foreach($salesData as $item){
-                    $productObject['product_id'] = $item->product_id;
-                    $productObject['quantity'] = $item->quantity;
-                    $productObject['price'] = $item->price;
-                    $productObject['amount'] = $item->amount;
+                    $productObject=[
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity,
+                        'price' => $item->price,
+                        'amount' => $item->amount,
+                    ];   
                
                 // $vlidator = Validator::make($productObject,[
                 //     "product_id"=>"required",
