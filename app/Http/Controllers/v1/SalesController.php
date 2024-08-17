@@ -142,7 +142,7 @@ class SalesController extends Controller
             $salesData = $request->input("salesObj");
             $paymentMethod = $request->input("payment_method");
             $ref_id = Str::uuid();
-            $productObjectArray = array();
+            $productObjectArray = [];
             foreach($salesData as $item){
                     $productObject['product_id'] = $item->product_id;
                     $productObject['quantity'] = $item->quantity;
