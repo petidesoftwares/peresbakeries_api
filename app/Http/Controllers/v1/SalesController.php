@@ -46,7 +46,7 @@ class SalesController extends Controller
  */
     public function index()
     {
-        return response()->json(["status"=>200, "data"=>Sales::paginate(15)],200);
+        return response()->json(["status"=>200, "data"=>Sales::with("soldproduct")->paginate(15)],200);
     }
 
     /**
