@@ -149,13 +149,13 @@ class SalesController extends Controller
                     'price' => $item->price,
                     'amount' => $item->amount,
                 ];
-                $vlidator = Validator::make($productObject,[
-                    "product_id"=>"required",
-                    "quantity"=>"requred",
-                    "price" => "required",
-                    "amount" => "required"
-                ]);
-                $validator.validate();
+                // $vlidator = Validator::make($productObject,[
+                //     "product_id"=>"required",
+                //     "quantity"=>"requred",
+                //     "price" => "required",
+                //     "amount" => "required"
+                // ]);
+                // $validator.validate();
                 return response()->json($productObject);
                 $productObject->ref_id = $ref_id;
                 $productObject->staff_id = $user->id;
