@@ -141,8 +141,7 @@ class SalesController extends Controller
             $request->validate(["salesObj"=>"required", "payment_method"=>"required"]);
             $salesData = $request->input("salesObj");
             $paymentMethod = $request->input("payment_method");
-            $ref_id = Str::uuid();
-            $productObjectArray = [];
+            $ref_id = Str::uuid();debugging testing
             foreach($salesData as $item){
                     $productObject=[
                         'product_id' => $item['product_id'],
@@ -150,25 +149,15 @@ class SalesController extends Controller
                         'price' => $item['price'],
                         'amount' => $item['amount'],
                     ];   
-               
-                // $vlidator = Validator::make($productObject,[
-                //     "product_id"=>"required",
-                //     "quantity"=>"requred",
-                //     "price" => "required",
-                //     "amount" => "required"
-                // ]);
-                // $validator.validate();
-                
+                              
                 $productObject['ref_id'] = $ref_id;
                 $productObject['staff_id'] = $user->id;
                 $productObject['payment_method']=$paymentMethod;
-                $productObjectArray[] = $productObject;
-                // Sales::create($productObject);
-                // $stock = Product::where("id",$productObject["product_id"])->get("stock");
-                // Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);
+                Sales::create($productObject);
+                $stock = Product::where("id",$productObject["product_id"])->get("stock");
+                Product::where("id", $productObject["product_id"])->update(["stock"=> $stock[0]->stock - $productObject["quantity"]]);
                 // Cart::truncate();
             }
-            return response()->json($productObjectArray);
             event(new SalesNotificationEvent($user->id, "New Sales"));
             return response()->json(["status"=>200, "data"=>Sales::where("ref_id",$ref_id)->get()],200);
         }
