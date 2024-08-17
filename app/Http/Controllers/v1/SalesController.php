@@ -141,7 +141,7 @@ class SalesController extends Controller
             $request->validate(["salesObj"=>"required", "payment_method"=>"required"]);
             $salesData = $request->input("salesObj");
             $paymentMethod = $request->input("payment_method");
-            $ref_id = Str::uuid();debugging testing
+            $ref_id = Str::uuid();
             foreach($salesData as $item){
                     $productObject=[
                         'product_id' => $item['product_id'],
