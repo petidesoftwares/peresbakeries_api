@@ -28,6 +28,7 @@ Route::group(["prefix"=>"v1"], function(){
         Route::post('/sales','App\Http\Controllers\v1\SalesController@store');
         Route::get('/sales','App\Http\Controllers\v1\SalesController@index');
         Route::get("/query/sales", 'App\Http\Controllers\v1\SalesController@getSalesByAdmin');
+        Route::get("/all/sales", 'App\Http\Controllers\v1\SalesController@getAllSalesByAdmin');
 
         Route::get('/expenditures', 'App\Http\Controllers\v1\ExpenditureController@index');
         Route::post('/expenditure', 'App\Http\Controllers\v1\ExpenditureController@store');
