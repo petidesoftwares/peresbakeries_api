@@ -85,8 +85,8 @@ class ExpenditureController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = Auth::user();
-        // if($user->position == "Manager"){
+        $user = Auth::user();
+        if($user->position == "Manager"){
             $request->validate([
                 "item" => "required",
                 "amount" => "required"
@@ -100,7 +100,7 @@ class ExpenditureController extends Controller
             Expendituer::create($expenditure);
 
             return response()->json(["status"=>200, "message"=>"Expenditure successfully registered."],200);
-        // }
+        }
         return response()->json(["status"=>401, "error"=>"Unauthorized access"],401);
     }
 

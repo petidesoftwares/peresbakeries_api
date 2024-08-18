@@ -90,7 +90,7 @@ class SalesController extends Controller
  */
 
     public function getSalesByAdmin(){
-        return response()->json(["status"=>200, "data"=>Sales::with("soldBy")->with("soldproduct")->paginate(15)],200);
+        return response()->json(["status"=>200, "data"=>Sales::with("soldBy")->with("soldproduct")->get()],200);
     }
 
     /**
