@@ -250,7 +250,7 @@ class SalesController extends Controller
  *     )
  * )
  */
-    public function GetDailySales(Request $request){
+    public function getDailySales(Request $request){
         $dateTime = $request->validate(["dateTime"=>"required|max:20"]);
         $sales = Sales::where("created_at",$dateTime)->get();
         return response()->json(["status"=>200, "data" => $sales],200);
