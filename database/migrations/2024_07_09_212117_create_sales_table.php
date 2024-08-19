@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignUuid("product_id")->constrained();
             $table->unsignedSmallInteger("quantity");
             $table->unsignedSmallInteger("price");
-            $table->unsignedSmallInteger("amount");
+            $table->unsignedBigInteger("amount");
             $table->string("payment_method");
             $table->foerignUuid("staff_id")->constrained();
             $table->timestamps();

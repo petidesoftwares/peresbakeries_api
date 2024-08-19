@@ -10,6 +10,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use Illuminate\Support\Str;
 
@@ -137,6 +138,16 @@ class SalesController extends Controller
     return response()->json(["status"=>200, "data"=>Sales::with("soldBy")->with("soldproduct")->get()],200);
 }
 
+public function aggregatedSales(){
+    $sales = DB::table('sales')
+                ->groupBy('ref_id', 'desc')->having("ref_id","!", null)
+                ->get();
+    return response()->json(["status"=>200, "data"=>$sales]);
+}
+
+public function refSales($ref_id){
+    return response()->json(['status'=>200, 'data'=> Sales::where('ref_id',$ref_id)->get()],200);
+}
     /**
      * Show the form for creating a new resource.
      */
