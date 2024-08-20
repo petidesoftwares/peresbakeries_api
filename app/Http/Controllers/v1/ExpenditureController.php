@@ -43,7 +43,7 @@ class ExpenditureController extends Controller
         return response()->json(["status"=>200, "data"=>Expenditure::paginate(15)],200);
     }
 
-        /**
+/**
  * @OA\Get(
  *     path="/v1/staff/list/expenditures",
  *     operationId="GetAllListedExpenditure",
@@ -73,6 +73,40 @@ class ExpenditureController extends Controller
 public function getExpenditures()
 {
     return response()->json(["status"=>200, "data"=>Expenditure::all()],200);
+}
+
+        /**
+ * @OA\Get(
+ *     path="/v1/staff/daily/expenditures",
+ *     operationId="GetDailyExpenditure",
+ *     tags={"SalesExpenditure"},
+ *     summary="Get daily expenditures",
+ *     description="Get daily expenditures",
+ * 
+ *     @OA\Response(
+ *              response="200", 
+ *              description="Successful",
+ *              @OA\MediaType(
+ *              mediaType="application/json",
+ *              @OA\Schema(
+ *              example={
+ *                      {
+ *                          "id":1,
+ *                          "item": "Flour",
+ *                          "amount": 800,
+ *                          "created_at" : "dd/mm/yyyy"
+ *                      },
+ *                  },
+ *            )
+ *         ),
+ *     )
+ * )
+ */
+public function getDailyExpenditures(Request $request)
+{
+    $request->validate(["date"=>"required|max:10"]);
+    $date = $request->input("data");
+    return response()->json(["status"=>200, "data"=>Expenditure::where("created_at","like",$date."%")->get()],200);
 }
     /**
      * Show the form for creating a new resource.
