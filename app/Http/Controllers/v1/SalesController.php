@@ -140,7 +140,7 @@ class SalesController extends Controller
 
 public function aggregatedSales(){
     $sales = DB::table('sales')
-                ->groupBy('ref_id', 'desc')->having("ref_id","!", null)
+                ->groupBy('ref_id', 'asc')->having("ref_id","!", null)
                 ->get();
     return response()->json(["status"=>200, "data"=>$sales]);
 }
