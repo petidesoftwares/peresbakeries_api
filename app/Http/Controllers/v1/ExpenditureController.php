@@ -97,7 +97,7 @@ class ExpenditureController extends Controller
                 "amount" => $request->input("amount"),
             ];
 
-            Expendituer::create($expenditure);
+            Expenditure::create($expenditure);
 
             return response()->json(["status"=>200, "message"=>"Expenditure successfully registered."],200);
         }
