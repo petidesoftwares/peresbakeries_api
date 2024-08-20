@@ -11,7 +11,7 @@ use App\Models\Expenditure;
 
 class ExpenditureController extends Controller
 {
-    /**
+/**
  * @OA\Get(
  *     path="/v1/staff/expenditures",
  *     operationId="GetAllExpenditure",
@@ -43,6 +43,37 @@ class ExpenditureController extends Controller
         return response()->json(["status"=>200, "data"=>Expenditure::paginate(15)],200);
     }
 
+        /**
+ * @OA\Get(
+ *     path="/v1/staff/list/expenditures",
+ *     operationId="GetAllListedExpenditure",
+ *     tags={"SalesExpenditure"},
+ *     summary="Get all expenditures unpaginated",
+ *     description="Get all expenditures unpaginated",
+ * 
+ *     @OA\Response(
+ *              response="200", 
+ *              description="Successful",
+ *              @OA\MediaType(
+ *              mediaType="application/json",
+ *              @OA\Schema(
+ *              example={
+ *                      {
+ *                          "id":1,
+ *                          "item": "Flour",
+ *                          "amount": 800,
+ *                          "created_at" : "dd/mm/yyyy"
+ *                      },
+ *                  },
+ *            )
+ *         ),
+ *     )
+ * )
+ */
+public function getExpenditures()
+{
+    return response()->json(["status"=>200, "data"=>Expenditure::all()],200);
+}
     /**
      * Show the form for creating a new resource.
      */

@@ -34,6 +34,7 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get("/ref/sales", 'App\Http\Controllers\v1\SalesController@refSales');
 
         Route::get('/expenditures', 'App\Http\Controllers\v1\ExpenditureController@index');
+        Route::get('list/expenditures', 'App\Http\Controllers\v1\ExpenditureController@getExpenditures');
         Route::post('/expenditure', 'App\Http\Controllers\v1\ExpenditureController@store');
 
         Route::post("/logout","App\Http\Controllers\Auth\LoginController@logout");
