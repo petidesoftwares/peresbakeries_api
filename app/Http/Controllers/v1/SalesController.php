@@ -262,8 +262,9 @@ public function refSales($ref_id){
  * )
  */
     public function getDailySales(Request $request){
-        $dateTime = $request->validate(["dateTime"=>"required|max:20"]);
-        $sales = Sales::where("created_at",$dateTime)->get();
+        $date = $request->validate(["date"=>"required|max:20"]);
+
+        $sales = Sales::where("created_at","like",$date."%")->get();
         return response()->json(["status"=>200, "data" => $sales],200);
     }
 
