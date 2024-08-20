@@ -139,7 +139,7 @@ class SalesController extends Controller
 }
 
 public function aggregatedSales(){
-    $sales = DB::table('sales')
+    $sales = DB::table('sales')->select("*")
                 ->groupBy('ref_id')
                 ->get();
     return response()->json(["status"=>200, "data"=>$sales]);
