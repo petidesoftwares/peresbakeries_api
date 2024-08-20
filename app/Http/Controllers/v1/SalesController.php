@@ -146,7 +146,7 @@ public function aggregatedSales(){
 }
 
 public function refSales($ref_id){
-    return response()->json(['status'=>200, 'data'=> Sales::where('ref_id',$ref_id)->get()],200);
+    return response()->json(['status'=>200, 'data'=> Sales::where('ref_id',$ref_id)->with("soldby")->with("soldproduct")->get()],200);
 }
     /**
      * Show the form for creating a new resource.
