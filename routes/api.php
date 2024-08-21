@@ -30,7 +30,7 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get("/query/sales", 'App\Http\Controllers\v1\SalesController@getSalesByAdmin');
         Route::get("/all/sales", 'App\Http\Controllers\v1\SalesController@getAllSalesByAdmin');
         Route::get("/daily/sales", 'App\Http\Controllers\v1\SalesController@getDailySales');
-        Route::get("/agg/sales", 'App\Http\Controllers\v1\SalesController@aggregatedSales');
+        Route::get("/sales-tracking/sales", 'App\Http\Controllers\v1\SalesController@aggregatedSales');
         Route::get("/ref/sales", 'App\Http\Controllers\v1\SalesController@refSales');
 
         Route::get('/expenditures', 'App\Http\Controllers\v1\ExpenditureController@index');
