@@ -105,7 +105,7 @@ public function getExpenditures()
 public function getDailyExpenditures(Request $request)
 {
     $request->validate(["date"=>"required|max:10"]);
-    $date = $request->input("data");
+    $date = $request->input("date");
     return response()->json(["status"=>200, "data"=>Expenditure::where("created_at","like",$date."%")->get()],200);
 }
     /**

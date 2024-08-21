@@ -139,10 +139,9 @@ class SalesController extends Controller
 }
 
 public function aggregatedSales(){
-    $sales = DB::select('SELECT "ref_id", "staff_id",
-        SUM("amount") AS "amount",
-        "payment_method" FROM sales
-                GROUPBY("ref_id")');
+    $sales = DB::select('SELECT "ref_id",
+        COUNT("product_id") AS "products" FROM sales
+                GROUP BY "ref_id"');
     return response()->json(["status"=>200, "data"=>$sales]);
 }
 
