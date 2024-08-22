@@ -113,7 +113,9 @@ class StaffController extends Controller
     
             $validator->validate();
             
-            if($request->input('position') == "CEO"){
+            if($request->input('position') != "CEO"){
+                $checkManager = Staff::where("position","Manager")->first();
+                return $checkManager;
                 $staff = [
                     'firstname'=>$request->input('firstname'),
                     'surname'=>$request->input('surname'),
