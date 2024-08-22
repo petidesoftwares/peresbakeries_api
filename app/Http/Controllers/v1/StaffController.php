@@ -115,7 +115,10 @@ class StaffController extends Controller
             
             if($request->input('position') != "CEO"){
                 $checkManager = Staff::where("position","Manager")->first();
-                return $checkManager;
+                if($request->input('position') == "Manager" && !empty($checkManager)){
+                    return response()->json(['status'=>300, "message"=>"Manager already exist"],300);
+                }
+                return "good to go";
                 $staff = [
                     'firstname'=>$request->input('firstname'),
                     'surname'=>$request->input('surname'),
