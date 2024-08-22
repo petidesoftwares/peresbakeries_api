@@ -20,7 +20,7 @@ class ProductsNotificationEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(array $product, string $message )
+    public function __construct(string $product, string $message )
     {
         $this->product = $product;
         $this->message = $message;

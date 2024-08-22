@@ -107,7 +107,7 @@ class ProductController extends Controller
             ]);
             $validator->validate();
             $newProduct = Product::create($product);
-            event(new ProductsNotificationEvent($newProduct, "New product added"));
+            event(new ProductsNotificationEvent($request->input("name"),"New product added"));
             return response()->json(["status"=>200, "data"=>$newProduct, "message"=>"Product successfully created"],200);
         }
         return respopnse()->json(["status"=>401, "error" => "Unauthorized Access"]);
