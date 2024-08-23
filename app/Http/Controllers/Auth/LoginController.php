@@ -82,13 +82,14 @@ class LoginController extends AuthController
             'password' => $request->input("password"),
         ];
 
-        $user = Auth::user();
-        if(!empty($user) && $user->mobile_number == $credentials['mobile_number']){
-            return response()->json(['status'=>401, "message"=>"This user already logged"]);
+        $user = Staff::where("mobile_number",$credentials['mobile_number'])->get("id");
+        $session = DB::table("session")->select("staff_id")->get();
+        if(!empty($session) && $user->id == $session[0]->staff_id){
+            return response()->json(['status'=>401, "message"=>"This user already logged"])
         }
         if($token = Auth::attempt($credentials)){
             if($credentials['mobile_number'] == $credentials['password']){
-                // DB::insert('insert into session (staff_id, ip_address, user_agent) Values (?,?,?,?)',[$user->id,$request->ip(), $request->header("user_agent")]);
+                DB::insert('insert into session (staff_id, ip_address, user_agent) Values (?,?,?,?)',[$user->id,$request->ip(), $request->header("user_agent")]);
                 return $this->firstLoginResponse(auth()->user(), $token);
             }else{
                 return $this->responseWithToken(auth()->user(), $token);
