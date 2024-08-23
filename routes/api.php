@@ -12,7 +12,8 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get('/staffs','App\Http\Controllers\v1\StaffController@index');
         Route::get('/staff/{id}','App\Http\Controllers\v1\StaffController@show');
         Route::post('/staff','App\Http\Controllers\v1\StaffController@store');
-        Route::post('/update/{id}','App\Http\Controllers\v1\StaffController@uppdate');
+        Route::post('/update/{id}','App\Http\Controllers\v1\StaffController@update');
+        Route::post('/update/password', 'App\Http\Controllers\v1\StaffController@updatePassword');
         Route::delete("/delete/{id}",'App\Http\Controllers\v1\StaffController@delete');
         
         Route::get('/products','App\Http\Controllers\v1\ProductController@index');

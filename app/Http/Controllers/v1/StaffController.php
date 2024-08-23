@@ -233,6 +233,46 @@ class StaffController extends Controller
         return response()->json(["status"=>200, "message"=>"Staff successfully updated"],200);
     }
 
+        /**
+     * @OA\Post(
+     *      path="v1/staff/password/update",
+     *      operationId="UpdateStaffPassword",
+     *      tags={"Staff"},
+     *      summary="Update user psaaword at first login",
+     *
+     *
+     *     @OA\RequestBody(
+     *         description="Update password object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UpdatedPasswordModel")
+     *     ),
+     *
+     *      @OA\Response(
+     *          response=200,
+     *          description="Password Successfully Updated",
+     *       ),
+     *
+     *      @OA\Response( response=422, description="Unproccessable data",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *              example={"error": "Unproccessable data"},
+     *            )
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     },
+     *
+     *     )
+     */
+    public function updatePassword(Request $request){
+        $user = Auth::user();
+        $request->validate(["newpassword" => "required|min:8"]);
+        $newPassword = $request->input();
+        Staff::where("id", $user->id)->update(["password", $newPassword]);
+    }
+
     /**
      * 
      * * @OA\Post(
