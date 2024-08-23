@@ -90,7 +90,7 @@ class LoginController extends AuthController
         }
         if($token = Auth::attempt($credentials)){
             if($credentials['mobile_number'] == $credentials['password']){
-                DB::insert('insert into session (staff_id, ip_address, user_agent) Values (?,?,?,?)',[$user->id,$request->ip(), $request->header("user_agent")]);
+                DB::insert('insert into session (staff_id, ip_address, user_agent) Values (?,?,?,?)',[$user[0]->id,$request->ip(), $request->header("user_agent")]);
                 return $this->firstLoginResponse(auth()->user(), $token);
             }else{
                 return $this->responseWithToken(auth()->user(), $token);
