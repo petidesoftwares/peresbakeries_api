@@ -113,7 +113,7 @@ class AuthController extends Controller
      *
      */
      public function refresh($user_type){
-        return $this->responseWithToken(Auth::guard($this->guardName)->user(), auth()->refresh());
+        return $this->responseWithToken(Auth::guard($this->guardName)->user(), Auth::guard($this->guardName)->refresh(), $user_type);
      }
 /**
      * @OA\Post(
