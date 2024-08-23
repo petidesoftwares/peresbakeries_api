@@ -245,7 +245,7 @@ class StaffController extends Controller
      *     @OA\RequestBody(
      *         description="Update password object",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/UpdatedPasswordModel")
+     *         @OA\JsonContent(ref="#/components/schemas/UpdatePasswordModel")
      *     ),
      *
      *      @OA\Response(
