@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Staff;
 
 class StaffController extends Controller
@@ -270,7 +271,8 @@ class StaffController extends Controller
         $user = auth()->user();
         $request->validate(["newpassword" => "required|min:8"]);
         $newPassword = $request->input("newpassword");
-        Staff::where("id", $user->id)->update(["password" => $newPassword]);
+        // Staff::where("id", $user->id)->update(["password" => $newPassword]);
+        DB::update("update staffs set password = ? where id = ?", [$newPassword, $user->id]);
         return response()->json(['status'=>200, "message" => "password sucessfully updated"], 200);
     }
 

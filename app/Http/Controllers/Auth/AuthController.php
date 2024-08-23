@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -66,6 +67,8 @@ class AuthController extends Controller
      */
 
      public function logout(){
+        $user = Auth::guard($this->guardName)->user();
+        DB::delete('delete from sessions where id = ?', [$user->id]);
         Auth::guard($this->guardName)->logout();
         return response()->json(["status"=>200, "data"=>"User successfully logged out"]);
      }
