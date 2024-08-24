@@ -272,7 +272,7 @@ class StaffController extends Controller
         $request->validate(["newpassword" => "required|min:8"]);
         $newPassword = $request->input("newpassword");
         // Staff::where("id", $user->id)->update(["password" => $newPassword]);
-        DB::update("update staff set password = ? where id = ?", [$newPassword, $user->id]);
+        DB::update("update staff set password = ? where id = ?", [Hash::make($newPassword), $user->id]);
         return response()->json(['status'=>200, "message" => "password sucessfully updated"], 200);
     }
 
