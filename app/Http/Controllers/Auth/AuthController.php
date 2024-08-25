@@ -68,7 +68,7 @@ class AuthController extends Controller
 
      public function logout(){
         $user = Auth::guard($this->guardName)->user();
-        DB::delete('delete from sessions where id = ?', [$user->id]);
+        DB::delete('delete from sessions where staff_id = ?', [$user->id]);
         Auth::guard($this->guardName)->logout();
         return response()->json(["status"=>200, "data"=>"User successfully logged out"]);
      }
