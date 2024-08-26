@@ -85,7 +85,6 @@ class LoginController extends AuthController
 
         $user = Staff::where("mobile_number",$credentials['mobile_number'])->get("id");
         $session = DB::table("sessions")->select("staff_id")->get();
-        return $session;
         if(count($session) > 0 && $user[0]->id == $session[0]->staff_id){
             return response()->json(['status'=>401, "message"=>"This user already logged"]);
         }
