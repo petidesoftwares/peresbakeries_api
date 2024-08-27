@@ -228,8 +228,6 @@ class StaffController extends Controller
         if($request->input("mobile_number") != null && $request->input("mobile_number") != ""){
             $request->validate(["mobile_number"=>"min:11|regex:/^([0-9\s\-\+\(\)]*)$/|unique:staff,mobile_number"]);
         }
-        $staff = Staff::find($id);
-        return $staff;
 
         $updater = Staff::where('id',$id)->update($editedData);
 
