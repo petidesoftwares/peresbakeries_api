@@ -230,7 +230,7 @@ class StaffController extends Controller
         }
         return $editedData;
 
-        $updater = Staff::where("id", $id)->update($editedData);
+        $updater = Staff::where("id", $id)->update(["gender" => $editedData->gender]);
         return $updater;
 
         return response()->json(["status"=>200, "message"=>"Staff successfully updated"],200);
