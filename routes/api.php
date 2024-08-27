@@ -38,6 +38,7 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get('list/expenditures', 'App\Http\Controllers\v1\ExpenditureController@getExpenditures');
         Route::get('daily/expenditures', 'App\Http\Controllers\v1\ExpenditureController@getDailyExpenditures');
         Route::post('/expenditure', 'App\Http\Controllers\v1\ExpenditureController@store');
+        Route::get('/daily/report', 'App\Http\Controllers\v1\SalesController@getDailyReport');
 
         Route::post("/logout","App\Http\Controllers\Auth\LoginController@logout");
     });

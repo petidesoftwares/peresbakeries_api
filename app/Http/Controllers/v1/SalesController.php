@@ -140,15 +140,14 @@ class SalesController extends Controller
 
 public function aggregatedSales(){
     $sales = DB::table("sales")->select(DB::raw('ref_id, COUNT(product_id) AS products'))->groupBy('ref_id')->paginate(15);
-    // $sales = DB::select('SELECT "ref_id",
-    //     COUNT("product_id") AS "products" FROM sales
-    //             GROUP BY "ref_id"');
     return response()->json(["status"=>200, "data"=>$sales]);
 }
 
 public function refSales($ref_id){
     return response()->json(['status'=>200, 'data'=> Sales::where('ref_id',$ref_id)->with("soldby")->with("soldproduct")->get()],200);
 }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -308,6 +307,19 @@ public function GetSalesRange(Request $request){
         return response()->json(["status"=>200, "data" => $sales],200);
     }
     return response()->json(["status" => 401, "message" => "Unauthorized request"],200);
+}
+
+public function getDailyReport(Request $request){
+    $user = Auth::user();
+    if($user->position == "CEO"){
+        $request->validate(["date"=>"required|max:10"]);
+
+        $out = Sales::where("created_at", "like",$request->input("date")."%")->get();
+        $in = Product::Where("created_at", "like", $request->input("date")."%")->get();
+
+        return response()->json(["status"=>200, "data"=>["soldout"=>$out, "addedproducts"=>$in]],200);
+    }
+    return response()->json(["status"=>401, "message"=>"Unauthorized access"],401);
 }
 
     /**

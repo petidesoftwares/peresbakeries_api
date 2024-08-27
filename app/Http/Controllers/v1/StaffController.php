@@ -229,9 +229,9 @@ class StaffController extends Controller
             $request->validate(["mobile_number"=>"min:11|regex:/^([0-9\s\-\+\(\)]*)$/|unique:staff,mobile_number"]);
         }
 
-        $updater = Staff::where('id',$id)->update($editedData);
+        Staff::where('id',$id)->update($editedData);
 
-        return response()->json(["status"=>200, "data" =>$updater, "message"=>"Staff successfully updated"],200);
+        return response()->json(["status"=>200, "message"=>"Staff successfully updated"],200);
     }
 
         /**
