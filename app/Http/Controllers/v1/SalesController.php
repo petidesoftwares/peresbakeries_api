@@ -139,7 +139,7 @@ class SalesController extends Controller
 }
 
 public function aggregatedSales(){
-    $sales = DB::table("sales")->select(DB::raw('ref_id, COUNT(product_id) AS products'))->groupBy('ref_id')->paginate(15);
+    $sales = DB::table("sales")->select(DB::raw('ref_id, created_at, COUNT(product_id) AS products'))->groupBy('ref_id')->orderBy('created_at','desc')->paginate(15);
     return response()->json(["status"=>200, "data"=>$sales]);
 }
 
