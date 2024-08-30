@@ -153,7 +153,7 @@ class SalesController extends Controller
         $salesData = DB::table("sales")
         ->join('products', 'products.id','=','sales.product_id' )
         ->select(DB::raw('products.name,sales.product_id, COUNT(sales.product_id) AS quantity_sold'))->groupBy('sales.product_id','products.name')->orderBy('sales.product_id','desc')->get(1);
-        return response()->json(["status"=>200, "data"=>$sales]);
+        return response()->json(["status"=>200, "data"=>$salesData]);
     }
 
     /**
