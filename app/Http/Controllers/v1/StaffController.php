@@ -93,7 +93,7 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if($user->position == "CEO"){
+        // if($user->position == "CEO"){
             $validator = Validator::make([
                 'firstname'=>$request->input('firstname'),
                 'surname'=>$request->input('surname'),
@@ -114,7 +114,7 @@ class StaffController extends Controller
     
             $validator->validate();
             
-            if($request->input('position') != "CEO"){
+            if($request->input('position') == "CEO"){
                 $checkManager = Staff::where("position","Manager")->first();
                 if($request->input('position') == "Manager" && !empty($checkManager)){
                     return response()->json(['status'=>300, "message"=>"Manager already exist"],300);
@@ -136,7 +136,7 @@ class StaffController extends Controller
             }
             return response()->json(["status"=>300, "message"=>"Position already taken"],300);    
             
-        }
+        // }
         
 
     }
