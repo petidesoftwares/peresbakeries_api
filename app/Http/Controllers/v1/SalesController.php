@@ -134,19 +134,27 @@ class SalesController extends Controller
  * )
  */
 
- public function getAllSalesByAdmin(){
-    return response()->json(["status"=>200, "data"=>Sales::with("soldBy")->with("soldproduct")->get()],200);
-}
+    public function getAllSalesByAdmin(){
+        return response()->json(["status"=>200, "data"=>Sales::with("soldBy")->with("soldproduct")->get()],200);
+    }
 
-public function aggregatedSales(){
-    $sales = DB::table("sales")->select(DB::raw('ref_id, created_at, COUNT(product_id) AS products'))->groupBy('ref_id','created_at')->orderBy('created_at','desc')->paginate(15);
-    return response()->json(["status"=>200, "data"=>$sales]);
-}
+    public function aggregatedSales(){
+        $sales = DB::table("sales")->select(DB::raw('ref_id, created_at, COUNT(product_id) AS products'))->groupBy('ref_id','created_at')->orderBy('created_at','desc')->paginate(15);
+        return response()->json(["status"=>200, "data"=>$sales]);
+    }
 
-public function refSales($ref_id){
-    return response()->json(['status'=>200, 'data'=> Sales::where('ref_id',$ref_id)->with("soldby")->with("soldproduct")->get()],200);
-}
+    public function refSales($ref_id){
+        return response()->json(['status'=>200, 'data'=> Sales::where('ref_id',$ref_id)->with("soldby")->with("soldproduct")->get()],200);
+    }
 
+
+    public function progressiveBarChartData(){
+        // $user = Auth::user();
+        $salesData = DB::table("sales")
+        ->join('products', 'products.id','=','sales.product_id' )
+        ->select(DB::raw('products.name,sales.product_id, COUNT(sales.product_id) AS quantity_sold'))->groupBy('sales.product_id','products.name')->orderBy('sales.product_id','desc')->get(1);
+        return response()->json(["status"=>200, "data"=>$sales]);
+    }
 
     /**
      * Show the form for creating a new resource.
