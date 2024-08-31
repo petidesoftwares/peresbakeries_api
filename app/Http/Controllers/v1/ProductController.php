@@ -190,12 +190,12 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $editedProduct = $request->all();
-        $validate = Validator::make($editedProduct,[
-            "name" => "max:25",
-            "price" => "digits:6",
-            "stock" => "digits:6",
-        ]);
-        $validator->validate();
+        // $validate = Validator::make($editedProduct,[
+        //     "name" => "max:25",
+        //     "price" => "digits:6",
+        //     "stock" => "digits:6",
+        // ]);
+        // $validator->validate();
         Product::where("id", $id)->update($editedProduct);
         return response()->json(["status"=>200, "message"=>"Product record successfully updated"],200);
     }
