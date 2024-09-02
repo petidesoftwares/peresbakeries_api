@@ -95,6 +95,7 @@ class ProductController extends Controller
                 "name" => $request->input("name"),
                 "price" => $request->input("price"),
                 "description" => $request->input("description"),
+                "category" =>$request->input("category"),
                 "shape" => $request->input("shape"),
                 "size" => $request->input("size"),
                 "stock" => $request->input("stock"),
@@ -103,6 +104,7 @@ class ProductController extends Controller
                 "name" => "required|max:25",
                 "price" => "required",
                 "description" => "required",
+                "category" =>"required",
                 "stock" => "required"
             ]);
             $validator->validate();

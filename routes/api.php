@@ -27,7 +27,7 @@ Route::group(["prefix"=>"v1"], function(){
 
         Route::get("/carts", 'App\Http\Controllers\v1\CartController@index');
         Route::post("/cart", 'App\Http\Controllers\v1\CartController@store');
-        Route::delete("/cart/delete/{id}", "App\Http\Controllers\CartController@delete");
+        Route::delete("/cart/delete/{id}", 'App\Http\Controllers\v1\CartController@delete');
     
         Route::post('/sales','App\Http\Controllers\v1\SalesController@store');
         Route::get('/sales','App\Http\Controllers\v1\SalesController@index');
