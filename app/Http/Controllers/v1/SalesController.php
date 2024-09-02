@@ -150,17 +150,22 @@ class SalesController extends Controller
 
     public function progressiveBarChartData(){
         // $user = Auth::user();
-        $salesData = DB::table("sales")
-        ->join('products', 'products.id','=','sales.product_id' )
-        ->select(DB::raw('products.name,sales.product_id, COUNT(sales.product_id) AS quantity_sold'))->groupBy('sales.product_id','products.name')->orderBy('sales.product_id','desc')->get();
-        $barChartData =[["Products", "Sales"]];
-        foreach($salesData as $data){
-            $sales = array();
-            $sales[] = $data->name;
-            $sales[] = $data->quantity_sold; 
-            $barChartData[] = $sales;
-         }
-        return response()->json(["status"=>200, "data"=>$barChartData]);
+        $categories = ["Soft Drinks", "Bread", "Confectionaries","Energy Drinks", "Wines", "Alcoholic"];
+        $motherChart = [];
+        foreach($categories as $category){
+            $salesData = DB::table("sales")
+            ->join('products', 'products.id','=','sales.product_id' )
+            ->select(DB::raw('products.name,sales.product_id, COUNT(sales.product_id) AS quantity_sold'))->where('categories',$category)->groupBy('sales.product_id','products.name')->orderBy('sales.product_id','desc')->get();
+            $barChartData =[["Products", "Sales"]];
+            foreach($salesData as $data){
+                $sales = array();
+                $sales[] = $data->name;
+                $sales[] = $data->quantity_sold; 
+                $barChartData[] = $sales;
+             }
+             $motherChart->$category = $barChartData;
+        }
+        return response()->json(["status"=>200, "data"=>$motherChart]);
     }
 
     /**

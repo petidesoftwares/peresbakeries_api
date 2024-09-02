@@ -7,7 +7,7 @@ Route::post("/staff/login","App\Http\Controllers\Auth\LoginController@login");
 Route::post("/staff/refresh/{user_type}", 'App\Http\Controllers\Auth\LoginController@refresh');
 Route::post("/staff/firstlogin", "App\Http\Controllers\Auth\LoginController@firstLogin");
 Route::post('/product/update/{id}','App\Http\Controllers\v1\ProductController@update');
-// Route::get('/chart/bar', 'App\Http\Controllers\v1\SalesController@progressiveBarChartData');
+Route::get('/chart/bar', 'App\Http\Controllers\v1\SalesController@progressiveBarChartData');
 // Route::post('/staff','App\Http\Controllers\v1\StaffController@store');
 
 Route::group(["prefix"=>"v1"], function(){
