@@ -84,6 +84,7 @@ class LoginController extends AuthController
         ];
 
         $user = Staff::where("mobile_number",$credentials['mobile_number'])->get("id");
+        return $user;
         $session = DB::select('select staff_id from sessions where staff_id =?', [$user[0]->id]);
         
         // if(count($session) > 0){
