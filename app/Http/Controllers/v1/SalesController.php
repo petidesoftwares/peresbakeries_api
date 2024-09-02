@@ -163,7 +163,7 @@ class SalesController extends Controller
                 $sales[] = $data->quantity_sold; 
                 $barChartData[] = $sales;
              }
-             $motherChart->$category = $barChartData;
+             $motherChart[$category.''] = $barChartData;
         }
         return response()->json(["status"=>200, "data"=>$motherChart]);
     }
