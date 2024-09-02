@@ -155,7 +155,7 @@ class SalesController extends Controller
         foreach($categories as $category){
             $salesData = DB::table("sales")
             ->join('products', 'products.id','=','sales.product_id' )
-            ->select(DB::raw('products.name,sales.product_id, COUNT(sales.product_id) AS quantity_sold'))->where('products.categories',$category)->groupBy('sales.product_id','products.name')->orderBy('sales.product_id','desc')->get();
+            ->select(DB::raw('products.name,sales.product_id, COUNT(sales.product_id) AS quantity_sold'))->where('products.category',$category)->groupBy('sales.product_id','products.name')->orderBy('sales.product_id','desc')->get();
             $barChartData =[["Products", "Sales"]];
             foreach($salesData as $data){
                 $sales = array();
