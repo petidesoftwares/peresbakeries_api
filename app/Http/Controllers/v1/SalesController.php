@@ -7,6 +7,7 @@ use App\Events\SalesNotificationEvent;
 use Illuminate\Http\Request;
 use App\Models\Sales;
 use App\Models\Product;
+use App\Models\Expenditure;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -166,6 +167,12 @@ class SalesController extends Controller
              $motherChart[$category.''] = $barChartData;
         }
         return response()->json(["status"=>200, "data"=>$motherChart]);
+    }
+
+    public function progressivePieChartData(){
+        $revenue = DB::table("sales")->select('SUM(amount) AS revenue')->get();
+        $expenditure = DB::table('expenditure')->select('SUM(amount) AS expenditure')->get();
+        return response()->json(['status'=>200, 'data1'=>$revenue, 'data2'=>$expenditure],200);
     }
 
     /**
