@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use Illuminate\Support\Str;
 
+use App\Analytics\DataAnalysis;
+
 class SalesController extends Controller
 {
 /**
@@ -170,9 +172,11 @@ class SalesController extends Controller
     }
 
     public function progressivePieChartData(){
+        $analytics = new DataAnalysis();
         $revenue = DB::table("sales")->select(DB::raw('SUM(amount) AS revenue'))->get();
         $expenditure = DB::table('expenditures')->select(DB::raw('SUM(amount) AS expenditure'))->get();
-        return response()->json(['status'=>200, 'data1'=>$revenue, 'data2'=>$expenditure],200);
+     
+        return response()->json(['status'=>200, 'data1'=>$analytics->calculatePieDataSector(intval($revenue[0]->revenue), [intval($revenue[0]->revenue),intval($expenditure[0]->expenditure)])],200);
     }
 
     /**
