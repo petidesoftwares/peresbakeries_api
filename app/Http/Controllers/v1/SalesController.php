@@ -171,7 +171,7 @@ class SalesController extends Controller
 
     public function progressivePieChartData(){
         $revenue = DB::table("sales")->select(DB::raw('SUM(amount) AS revenue'))->get();
-        $expenditure = DB::table('expenditure')->select('SUM(amount) AS expenditure')->get();
+        $expenditure = DB::table('expenditures')->select(DB::raw('SUM(amount) AS expenditure'))->get();
         return response()->json(['status'=>200, 'data1'=>$revenue, 'data2'=>$expenditure],200);
     }
 
