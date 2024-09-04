@@ -1,0 +1,23 @@
+#header {
+    text-align: center;
+    border-bottom: solid 1px grey;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+thead {
+    font-size: 8;
+    font-weight: bold;
+}
+
+table, td, th, tr {
+    border: 1px solid grey;
+  }
+
+.level-2-header {
+    text-align: justify;
+}
