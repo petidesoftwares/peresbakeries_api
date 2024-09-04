@@ -38,6 +38,7 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get("/sales/{ref_id}", 'App\Http\Controllers\v1\SalesController@refSales');
         Route::get('/daily/report', 'App\Http\Controllers\v1\SalesController@getDailyReport');
         Route::get('/chart/bar', 'App\Http\Controllers\v1\SalesController@progressiveBarChartData');
+        Route::get('/chart/pie', 'App\Http\Controllers\v1\SalesController@progressivePieChartData');
 
         Route::get('/expenditures', 'App\Http\Controllers\v1\ExpenditureController@index');
         Route::get('list/expenditures', 'App\Http\Controllers\v1\ExpenditureController@getExpenditures');
