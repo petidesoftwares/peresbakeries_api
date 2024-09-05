@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for($k = 0; $k < $motherArray['size'], $k++)
+                    @for($k = 0; $k < $motherArray['size']; $k++)
                     <tr>
                         <td>$motherArray['date']</td>
                         <td></td>
