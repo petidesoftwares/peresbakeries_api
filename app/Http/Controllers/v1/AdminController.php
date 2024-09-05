@@ -33,7 +33,6 @@ class AdminController extends Controller
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
             $motherArray["expenses"] = $cashSales;
         }
-        return $motherArray;
         $pdf = Pdf::loadView('dailycashbook',compact('motherArray'))->setPaper('a4','landscape');
         return $pdf->download('Daily Cashbook.pdf');
     }

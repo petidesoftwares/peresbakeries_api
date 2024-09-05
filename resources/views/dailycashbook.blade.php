@@ -42,8 +42,16 @@
                         <td>$motherArray['date']</td>
                         <td></td>
                         <td></td>
-                        <td>$motherArray['cash_sales'][$k]->amount</td>
-                        <td>$motherArray['bank_sales'][$k]->amount</td>
+                        @if(count($motherArray['cash_sales']) >0)
+                            <td>$motherArray['cash_sales'][$k]->amount</td>
+                        @else
+                            <td></td>
+                        @endif
+                        @if(count($motherArray['bank_sales'])>0)
+                            <td>$motherArray['bank_sales'][$k]->amount</td>
+                        @else
+                            <td></td>
+                        @endif
                         <td></td>
                         <td></td>
                         <td></td>
