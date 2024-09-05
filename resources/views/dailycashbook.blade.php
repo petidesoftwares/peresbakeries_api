@@ -40,6 +40,21 @@
                     @for($k = 0; $k < $motherArray['size'], $k++)
                     <tr>
                         <td>$motherArray['date']</td>
+                        <td></td>
+                        <td></td>
+                        <td>$motherArray['cash_sales'][$k]->amount</td>
+                        <td>$motherArray['bank_sales'][$k]->amount</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        @if(count($motherArray['expenses']) >0)
+                            <td>$motherArray['expenses'][0]->amount</td>
+                        @else
+                            <td></td>
+                        @endif
+                        <td></td>
                     </tr>
                     @endfor
                 </tbody>
