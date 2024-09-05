@@ -20,14 +20,15 @@ class AdminController extends Controller
         $cashSales = Sales::where("payment_method","=","Cash")->where('created_at','like',$date."%")->get('amount');
         $expenditure = Expenditure::where("created_at","like",$date."%")->get("amount");
         $util = new Util();
-        return response()->json($util->findLargestArraySize($cashSales, $bankSales, $expenditure));
         $motherArray = [
             "date"=>$date,
+            "size"=>$util->findLargestArraySize($cashSales, $bankSales, $expenditure),
             "cash_sales"=>$cashSales,
             "bank_sales"=>$bankSales,
             "expenses"=>$expenditure
         ];
-        $pdf = Pdf::loadView('dailycashbook')->setPaper('a4','landscape');
+        return $motherArray;
+        $pdf = Pdf::loadView('dailycashbook',compact('motherArray'))->setPaper('a4','landscape');
         return $pdf->download('Daily Cashbook.pdf');
     }
 }
