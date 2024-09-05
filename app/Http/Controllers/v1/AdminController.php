@@ -25,7 +25,7 @@ class AdminController extends Controller
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
             $motherArray["cash_sales"] =$cashSales;
         }
-        if(couont($bankSales) > 0){
+        if(count($bankSales) > 0){
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
             $motherArray["bank_sales"] = $cashSales;
         }
