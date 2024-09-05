@@ -16,9 +16,9 @@ class AdminController extends Controller
     public function getDailyCashBook(Request $request){
         $request->validate(["date"=>"required|max:10"]);
         $date = $request->input('date');
-        $bankSales = Sales::where("payment_method","!=","Cash")->where('created_at',$date)->get('amount');
-        $cashSales = Sales::where("payment_method","=","Cash")->where('created_at',$date)->get('amount');
-        $expenditure = Expenditure::where("created_at",$date)->get("amount");
+        $bankSales = Sales::where("payment_method","!=","Cash")->where('created_at','like',$date."%")->get('amount');
+        $cashSales = Sales::where("payment_method","=","Cash")->where('created_at','like',$date."%")->get('amount');
+        $expenditure = Expenditure::where("created_at","like",$date."%")->get("amount");
         $util = new Util();
         return response()->json($util->findLargestArraySize($cashSales, $bankSales, $expenditure));
         $motherArray = [
