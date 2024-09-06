@@ -58,7 +58,7 @@
                         <td></td>
                         <td></td>
                         @if(array_key_exists('expenses', $motherArray))
-                            <td>{{$motherArray['expenses'][0]->amount}}</td>
+                            <td>{{$motherArray['expenses'][$k]->amount}}</td>
                         @else
                             <td></td>
                         @endif
