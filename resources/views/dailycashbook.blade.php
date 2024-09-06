@@ -39,16 +39,16 @@
                 <tbody>
                     @for($k = 0; $k < $motherArray['size']; $k++)
                     <tr>
-                        <td>$motherArray['date']</td>
+                        <td>{{$motherArray['date']}}</td>
                         <td></td>
                         <td></td>
                         @if(count($motherArray['cash_sales']) >0)
-                            <td>$motherArray['cash_sales'][$k]->amount</td>
+                            <td>{{$motherArray['cash_sales'][$k]->amount}}</td>
                         @else
                             <td></td>
                         @endif
                         @if(count($motherArray['bank_sales'])>0)
-                            <td>$motherArray['bank_sales'][$k]->amount</td>
+                            <td>{{$motherArray['bank_sales'][$k]->amount}}</td>
                         @else
                             <td></td>
                         @endif
@@ -58,7 +58,7 @@
                         <td></td>
                         <td></td>
                         @if(array_key_exists('expenses', $motherArray))
-                            <td>$motherArray['expenses'][0]->amount</td>
+                            <td>{{$motherArray['expenses'][0]->amount}}</td>
                         @else
                             <td></td>
                         @endif
