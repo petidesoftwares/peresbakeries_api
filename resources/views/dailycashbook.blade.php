@@ -76,7 +76,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>{{$motherArray[total_expenses]}}</td>
+                        <td>{{$motherArray['total_expenses']}}</td>
                         <td></td>
                     </tr>
                 </tbody>
