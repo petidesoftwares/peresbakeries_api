@@ -30,6 +30,7 @@ class AdminController extends Controller
             foreach($cashSales as $sales_1){
                 $totalCashSales += $sales_1->amount;
             }
+            $motherArray["total_cash_sales"] = $totalCashSales;
         }
         if(count($bankSales) > 0){
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
@@ -37,6 +38,7 @@ class AdminController extends Controller
             foreach($bankSales as $sales_2){
                 $totalBankSales += $sales_2->amount;
             }
+            $motherArray["total_bank_sales"] = $totalBankSales;
         }
         if(count($expenditure) > 0){
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
@@ -45,7 +47,7 @@ class AdminController extends Controller
                 $totalExpenses += $expense->amount;
             }
         }
-        return response()->json(["totalCash"=>$totalCashSales, "totalBank"=>$totalBankSales, "totalExp"=>$totalExpenses]);
+        $motherArray["total_expenses"] = $totalExpenses;
         $pdf = Pdf::loadView('dailycashbook',compact('motherArray'))->setPaper('a4','landscape');
         return $pdf->download('Daily Cashbook.pdf');
     }

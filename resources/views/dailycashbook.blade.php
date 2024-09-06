@@ -65,6 +65,20 @@
                         <td></td>
                     </tr>
                     @endfor
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{$motherArray['total_cash_sales']}}</td>
+                        <td>{{$motherArray['total_bank_sales']}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{$motherArray[total_expenses]}}</td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
