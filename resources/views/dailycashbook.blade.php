@@ -42,12 +42,12 @@
                         <td>{{$motherArray['date']}}</td>
                         <td></td>
                         <td></td>
-                        @if(count($motherArray['cash_sales']) >0)
+                        @if(count($motherArray['cash_sales']) >0 && $k < count($motherArray['cash_sales']))
                             <td>{{$motherArray['cash_sales'][$k]->amount}}</td>
                         @else
                             <td></td>
                         @endif
-                        @if(count($motherArray['bank_sales'])>0)
+                        @if(count($motherArray['bank_sales'])>0 && $k < count($motherArray['bank_sales']))
                             <td>{{$motherArray['bank_sales'][$k]->amount}}</td>
                         @else
                             <td></td>
@@ -57,7 +57,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        @if(array_key_exists('expenses', $motherArray))
+                        @if(array_key_exists('expenses', $motherArray) && $k < count($motherArray['expenses']))
                             <td>{{$motherArray['expenses'][$k]->amount}}</td>
                         @else
                             <td></td>
