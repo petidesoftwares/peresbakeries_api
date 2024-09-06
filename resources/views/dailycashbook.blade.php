@@ -57,7 +57,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        @if(count($motherArray['expenses']) >0)
+                        @if(array_key_exists('expenses', $motherArray]))
                             <td>$motherArray['expenses'][0]->amount</td>
                         @else
                             <td></td>
