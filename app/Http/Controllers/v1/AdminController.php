@@ -27,11 +27,11 @@ class AdminController extends Controller
         }
         if(count($bankSales) > 0){
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
-            $motherArray["bank_sales"] = $cashSales;
+            $motherArray["bank_sales"] = $bankSales;
         }
         if(count($expenditure) > 0){
             $motherArray["size"] = $util->findLargestArraySize($cashSales, $bankSales, $expenditure);
-            $motherArray["expenses"] = $cashSales;
+            $motherArray["expenses"] = $expenditure;
         }
         $pdf = Pdf::loadView('dailycashbook',compact('motherArray'))->setPaper('a4','landscape');
         return $pdf->download('Daily Cashbook.pdf');
