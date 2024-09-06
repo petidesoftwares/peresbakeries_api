@@ -21,3 +21,7 @@ table, td, th, tr {
 .level-2-header {
     text-align: justify;
 }
+
+#cumm_row {
+    font-weight: bold;
+}

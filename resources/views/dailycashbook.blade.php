@@ -65,9 +65,9 @@
                         <td></td>
                     </tr>
                     @endfor
-                    <tr>
+                    <tr id="cumm_row">
                         <td></td>
-                        <td></td>
+                        <td>Total</td>
                         <td></td>
                         <td>{{$motherArray['total_cash_sales']}}</td>
                         <td>{{$motherArray['total_bank_sales']}}</td>
