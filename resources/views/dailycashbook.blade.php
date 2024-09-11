@@ -54,9 +54,9 @@
                         @endif
                         @if((count($motherArray['bank_sales'])>0 && $k < count($motherArray['bank_sales'])) && (count($motherArray['cash_sales'])>0 && $k < count($motherArray['cash_sales'])))
                             <td>{{$motherArray['cash_sales'][$k]->amount + $motherArray['bank_sales'][$k]->amount}}</td> 
-                        @else if(count($motherArray['cash_sales'])>0 && $k < count($motherArray['cash_sales']))
+                        @elseif(count($motherArray['cash_sales'])>0 && $k < count($motherArray['cash_sales']))
                             <td>{{$motherArray['cash_sales'][$k]->amount}}</td>
-                        @else if(count($motherArray['bank_sales'])>0 && $k < count($motherArray['bank_sales']))
+                        @elseif(count($motherArray['bank_sales'])>0 && $k < count($motherArray['bank_sales']))
                             <td>{{$motherArray['bank_sales'][$k]->amount}}</td>       
                         @else
                             <td></td>
