@@ -79,7 +79,7 @@
                         <td></td>
                         <td>{{$motherArray['total_cash_sales']}}.00</td>
                         <td>{{$motherArray['total_bank_sales']}}.00</td>
-                        <td></td>
+                        <td>{{$motherArray['total_cash_sales'] + $motherArray['total_bank_sales']}}.00</td>
                         <td></td>
                         <td></td>
                         <td></td>
