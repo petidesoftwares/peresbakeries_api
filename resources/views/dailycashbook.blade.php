@@ -52,7 +52,11 @@
                         @else
                             <td></td>
                         @endif
-                        <td>{{$motherArray['cash_sales'][$k]->amount + $motherArray['bank_sales'][$k]->amount}}</td>                        
+                        @if((count($motherArray['bank_sales'])>0 && $k < count($motherArray['bank_sales'])) && (count($motherArray['cash_sales'])>0 && $k < count($motherArray['cash_sales'])))
+                            <td>{{$motherArray['cash_sales'][$k]->amount + $motherArray['bank_sales'][$k]->amount}}</td>    
+                        @else
+                            <td></td>
+                        @endif                    
                         <td></td>
                         <td></td>
                         <td></td>
