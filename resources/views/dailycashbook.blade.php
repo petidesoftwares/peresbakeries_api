@@ -8,6 +8,7 @@
     </head>
     <body>
         <div id = "header">
+            <div id="logo"><img src = "{{public_path('static_files/bakery-logo.png')}}"/></div>
             <div id="header-title">PERE'S BAKERY DAILY CASHBOOK</div>
         </div>
         <div id = "reportbody">

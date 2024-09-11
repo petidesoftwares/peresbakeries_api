@@ -5,6 +5,11 @@
     font-weight: bold;
 }
 
+#logo {
+    width: 30px;
+    height: 30px;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
