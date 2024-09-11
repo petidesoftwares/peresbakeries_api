@@ -52,7 +52,7 @@
                         @else
                             <td></td>
                         @endif
-                        <td></td>                        
+                        <td>{{$motherArray['cash_sales'][$k]->amount + $motherArray['bank_sales'][$k]->amount}}</td>                        
                         <td></td>
                         <td></td>
                         <td></td>
