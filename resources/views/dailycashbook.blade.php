@@ -52,7 +52,6 @@
                         @else
                             <td></td>
                         @endif
-                        <td></td>
                         <td></td>                        
                         <td></td>
                         <td></td>
