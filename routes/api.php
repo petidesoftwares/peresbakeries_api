@@ -9,7 +9,7 @@ Route::post("/staff/firstlogin", "App\Http\Controllers\Auth\LoginController@firs
 Route::post('/product/update/{id}','App\Http\Controllers\v1\ProductController@update');
 Route::get('/chart/pie', 'App\Http\Controllers\v1\SalesController@progressivePieChartData');
 // Route::post('/staff','App\Http\Controllers\v1\StaffController@store');
-Route::get('/daily/cashbook','App\Http\Controllers\v1\AdminController@getDailyCashBook');
+
 
 Route::group(["prefix"=>"v1"], function(){
     Route::group(["prefix"=>"staff", "middleware"=>['assign.guard:staff','jwt.auth']], function(){
@@ -40,6 +40,8 @@ Route::group(["prefix"=>"v1"], function(){
         Route::get('/daily/report', 'App\Http\Controllers\v1\SalesController@getDailyReport');
         Route::get('/chart/bar', 'App\Http\Controllers\v1\SalesController@progressiveBarChartData');
         Route::get('/chart/pie', 'App\Http\Controllers\v1\SalesController@progressivePieChartData');
+
+        Route::get('/daily/cashbook','App\Http\Controllers\v1\AdminController@getDailyCashBook');
 
         Route::get('/expenditures', 'App\Http\Controllers\v1\ExpenditureController@index');
         Route::get('list/expenditures', 'App\Http\Controllers\v1\ExpenditureController@getExpenditures');
