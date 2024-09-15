@@ -175,7 +175,8 @@ class SalesController extends Controller
         $analytics = new DataAnalysis();
         $revenue = DB::table("sales")->select(DB::raw('SUM(amount) AS revenue'))->get();
         $expenditure = DB::table('expenditures')->select(DB::raw('SUM(amount) AS expenditure'))->get();
-        $dataArray = [$analytics->calculatePieDataSector(intval($expenditure[0]->expenditure), [intval($revenue[0]->revenue),intval($expenditure[0]->expenditure)]), $analytics->calculatePieDataSector(intval($revenue[0]->revenue), [intval($revenue[0]->revenue),intval($expenditure[0]->expenditure)])];
+        $profit = intval($revenue[0]->revenue)-intval($expenditure[0]->expenditure); 
+        $dataArray = [$analytics->calculatePieDataSector(intval($expenditure[0]->expenditure), [$profit,intval($expenditure[0]->expenditure)]), $analytics->calculatePieDataSector($profit, [$profit,intval($expenditure[0]->expenditure)])];
         return response()->json(['status'=>200, 'data'=> $dataArray],200);
     }
 
