@@ -7,7 +7,7 @@ Route::post("/staff/login","App\Http\Controllers\Auth\LoginController@login");
 Route::post("/staff/refresh/{user_type}", 'App\Http\Controllers\Auth\LoginController@refresh');
 Route::post("/staff/firstlogin", "App\Http\Controllers\Auth\LoginController@firstLogin");
 Route::post('/product/update/{id}','App\Http\Controllers\v1\ProductController@update');
-Route::get('/chart/pie', 'App\Http\Controllers\v1\SalesController@progressivePieChartData');
+// Route::get('/chart/pie', 'App\Http\Controllers\v1\SalesController@progressivePieChartData');
 // Route::post('/staff','App\Http\Controllers\v1\StaffController@store');
 
 
