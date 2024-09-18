@@ -83,8 +83,8 @@ class LoginController extends AuthController
             'password' => $request->input("password"),
         ];
 
-        $user = Staff::where("mobile_number",$credentials['mobile_number'])->get("id");
-        $session = DB::select('select staff_id from sessions where staff_id =?', [$user[0]->id]);
+        // $user = Staff::where("mobile_number",$credentials['mobile_number'])->get("id");
+        // $session = DB::select('select staff_id from sessions where staff_id =?', [$user[0]->id]);
         
         // if(count($session) > 0){
         //     return response()->json(['status'=>401, "message"=>"This user already logged"]);
