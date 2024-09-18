@@ -52,8 +52,12 @@ class AdminController extends Controller
             $pdf = Pdf::loadView('dailycashbook',compact('motherArray'))->setPaper('a4','landscape');
             return $pdf->download('Daily Cashbook.pdf');
         }else{
-            return response()->json(['status'=>200, 'message' => "No sales Sales or expenditure today"]);
+            return response()->json(['status'=>200, 'message' => "No sales Sales or expenditure today"],200);
         }
         
+    }
+
+    public function getCategories(){
+        return response()->json(["status"=>200,"data"=>DB::table("categories")->select("category")->get()],200);
     }
 }
