@@ -92,7 +92,7 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
         // if($user->position == "CEO"){
             $validator = Validator::make([
                 'firstname'=>$request->input('firstname'),
@@ -114,11 +114,11 @@ class StaffController extends Controller
     
             $validator->validate();
             
-            if($request->input('position') == "CEO"){
-                $checkManager = Staff::where("position","Manager")->first();
-                if($request->input('position') == "Manager" && !empty($checkManager)){
-                    return response()->json(['status'=>300, "message"=>"Manager already exist"],300);
-                }
+            // if($request->input('position') == "CEO"){
+            //     $checkManager = Staff::where("position","Manager")->first();
+            //     if($request->input('position') == "Manager" && !empty($checkManager)){
+            //         return response()->json(['status'=>300, "message"=>"Manager already exist"],300);
+            //     }
                 $staff = [
                     'firstname'=>$request->input('firstname'),
                     'surname'=>$request->input('surname'),
@@ -133,8 +133,8 @@ class StaffController extends Controller
                 $created = Staff::create($staff);
         
                 return response()->json(['status'=>200, "data"=> $created, 'message'=>'Staff created successfuly.'],200);
-            }
-            return response()->json(["status"=>300, "message"=>"Position already taken"],300);    
+            // }
+            // return response()->json(["status"=>300, "message"=>"Position already taken"],300);    
             
         // }
         
