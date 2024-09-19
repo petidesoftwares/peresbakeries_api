@@ -46,6 +46,10 @@ class ProductController extends Controller
         return response()->json(["status"=>200, "data"=>Product::where("deleted_at",null)->where("stock",">",0)->paginate(15)]);
     }
 
+    public function managersProductList(){
+        return response()->json(['status'=>200, 'data'=>Product::where("deleted_at",null)->paginate(15)],200);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
