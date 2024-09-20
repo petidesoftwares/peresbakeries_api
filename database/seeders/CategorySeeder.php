@@ -18,8 +18,9 @@ class CategorySeeder extends Seeder
             ["category"=>"Bread"],
             ["category"=>"Confectionaries"],
             ["category"=>"Energy Drinks"],
-            ["category"=>"Wines"],
-            ["category"=>"Alcholic"]
+            ["category"=>"Juice"],
+            ["category"=>"Pasteries"],
+            ["category"=>"Water"]
         ];
 
         foreach($categories as $category){
