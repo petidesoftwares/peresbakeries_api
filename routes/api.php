@@ -7,8 +7,7 @@ Route::post("/staff/login","App\Http\Controllers\Auth\LoginController@login");
 Route::post("/staff/refresh/{user_type}", 'App\Http\Controllers\Auth\LoginController@refresh');
 Route::post("/staff/firstlogin", "App\Http\Controllers\Auth\LoginController@firstLogin");
 Route::post('/product/update/{id}','App\Http\Controllers\v1\ProductController@update');
-Route::get('/manager/products','App\Http\Controllers\v1\ProductController@managersProductList');
-
+Route::get('/chart/bar', 'App\Http\Controllers\v1\SalesController@progressiveBarChartData');
 
 Route::group(["prefix"=>"v1"], function(){
     Route::group(["prefix"=>"staff", "middleware"=>['assign.guard:staff','jwt.auth']], function(){
