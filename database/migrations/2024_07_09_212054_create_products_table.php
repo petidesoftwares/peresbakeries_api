@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name",25);
             $table->unsignedSmallInteger("price");
             $table->text("description");
-            $table->enum("category",["Soft Drinks", "Bread", "Confectionaries","Energy Drinks", "Wines", "Alcoholic"]);
+            $table->string("category",);
             $table->string("shape", 50)->nullable();
             $table->string("size",20)->nullable();
             $table->unsignedSmallInteger("stock");
