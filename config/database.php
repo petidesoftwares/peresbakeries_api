@@ -47,17 +47,17 @@ return [
         //     'username' => env('DB_USERNAME', 'root'),
         //     'password' => env('DB_PASSWORD', ''),
 
-            'url' => env('CLEARDB_DATABASE_URL'),
-            'host' => env('DB_HOST', 'us-cluster-east-01.k8s.cleardb.net'),
-            'database' => env('DB_DATABASE', 'heroku_ff76476aadd051d'),
-            'username' =>env('DB_USERNAME', 'becb90391439dd'),
-            'password' => env('DB_PASSWORD', 'd2d1da42'),
-
             // 'url' => env('CLEARDB_DATABASE_URL'),
-            // 'host' =>env('DB_HOST', 'us-cluster-east-01.k8s.cleardb.net'),
-            // 'database' => env('DB_DATABASE','heroku_a0aee12356866e1'),
-            // 'username' =>env('DB_USERNAME', 'b0ee01590bfd2e'),
-            // 'password' => env('DB_PASSWORD', '290e5d5c'),
+            // 'host' => env('DB_HOST', 'us-cluster-east-01.k8s.cleardb.net'),
+            // 'database' => env('DB_DATABASE', 'heroku_ff76476aadd051d'),
+            // 'username' =>env('DB_USERNAME', 'becb90391439dd'),
+            // 'password' => env('DB_PASSWORD', 'd2d1da42'),
+
+            'url' => env('CLEARDB_DATABASE_URL'),
+            'host' =>env('DB_HOST', 'us-cluster-east-01.k8s.cleardb.net'),
+            'database' => env('DB_DATABASE','heroku_a0aee12356866e1'),
+            'username' =>env('DB_USERNAME', 'b0ee01590bfd2e'),
+            'password' => env('DB_PASSWORD', '290e5d5c'),
 
             
 
